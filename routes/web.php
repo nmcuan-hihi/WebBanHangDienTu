@@ -8,6 +8,7 @@ Route::post('login', [CustomAuthController::class, 'checkUser'])->name('user.che
 Route::get('signout', [CustomAuthController::class, 'signout'])->name('signout');
 Route::get('home', [CustomAuthController::class, 'gohome'])->name('home');
 Route::get('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
+Route::get('manageruser', [CustomAuthController::class, 'listuser'])->name('manageruser');
 Route::get('/', function () {
     return view('auth.login');
 });

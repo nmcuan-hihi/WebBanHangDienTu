@@ -20,6 +20,8 @@ class CustomAuthController extends Controller
         Auth::logout();
         return Redirect('login');
     }
+  
+  
     public function checkUser(Request $request)
     {
         $request->validate([
@@ -76,4 +78,20 @@ class CustomAuthController extends Controller
         // Nếu người dùng chưa đăng nhập
         return redirect("login")->withSuccess('You are not allowed to access');
     }
+
+    public function listUser()
+    {
+        // Kiểm tra xem người dùng đã đăng nhập hay chưa
+        if (Auth::check()) {
+            // Lấy danh sách người dùng phân trang
+            $users = User::paginate(10); // Số lượng người dùng trên mỗi trang 
+
+            // Trả về view 'auth.home' với dữ liệu người dùng phân trang
+            return view('manager.manageruser', ['users' => $users]);
+        }
+
+        // Nếu người dùng chưa đăng nhập
+        return redirect("login")->withSuccess('You are not allowed to access');
+    }
+   
 }
