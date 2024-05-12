@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,10 +53,11 @@ class CustomAuthController extends Controller
         // Kiểm tra xem người dùng đã đăng nhập hay chưa
         if (Auth::check()) {
             // // Lấy danh sách người dùng phân trang
-            // $users = User::paginate(20); // Số lượng trên mỗi trang 
-
-            // // Trả về view 'auth.home' với dữ liệu người dùng phân trang
-            return view('auth.home');
+          //  $product = Product::paginate(20); // Số lượng trên mỗi trang 
+            $products = Product::paginate(3);
+            return view('auth.home', compact('products'));
+            // Trả về view 'auth.home' với dữ liệu người dùng phân trang
+            // return view('auth.home', ['product' => $product]);
             // return view('auth.home', ['users' => $users]);
         }
 
@@ -66,14 +69,14 @@ class CustomAuthController extends Controller
         // Kiểm tra xem người dùng đã đăng nhập hay chưa
         if (Auth::check()) {
             // // Lấy danh sách người dùng phân trang
-            // $users = User::paginate(20); // Số lượng trên mỗi trang 
-
-            // // Trả về view 'auth.home' với dữ liệu người dùng phân trang
-            return view('manager.managerhome');
-            // return view('auth.home', ['users' => $users]);
-        }
+            $products = Product::paginate(7);
+           // Lấy danh sách danh mục
+           $categories = Category::all();
+           return view('manager.managerhome', compact('products', 'categories'));
+        
 
         // Nếu người dùng chưa đăng nhập
         return redirect("login")->withSuccess('You are not allowed to access');
     }
+}
 }

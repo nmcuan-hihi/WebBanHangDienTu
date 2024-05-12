@@ -19,8 +19,12 @@ class Manufacturer extends Model
         'manufacturer_phone',
         'manufacturer_email',        
     ];
+     /**
+     * Relationship
+     * @return HasMany
+     */
     public function product() : HasMany 
     {
-        return $this->hasMany(product::class);
+        return $this->hasMany(product::class, 'manufacturer_id', 'manufacturer_id');
     }
 }
