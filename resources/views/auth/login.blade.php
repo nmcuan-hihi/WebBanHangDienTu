@@ -13,10 +13,10 @@
             <div class="container">
             <!-- kiểm tra xem có bất kỳ lỗi nào được trả về không -->
               @if ($errors->any()) 
-              <div class="alert alert-success alert-dismissible">
+              <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                <!-- lỗi đầu tiên của trường 'login' -->
-                <strong> {{ $errors->first('login') }}</strong>
+                <!-- Hiển thị lỗi đầu tiên của trường 'email' -->
+                <strong> {{ $errors->first('email') }}</strong>
               </div>
               @endif
               <form action="{{ route('user.checkUser') }}" method="POST">

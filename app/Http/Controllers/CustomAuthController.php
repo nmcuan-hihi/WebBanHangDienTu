@@ -20,18 +20,19 @@ class CustomAuthController extends Controller
         Auth::logout();
         return Redirect('login');
     }
+    
     public function checkUser(Request $request)
     {
         $request->validate([
-            'email' => 'required',
-            'password' => 'required',
+            'email' => 'required|email',
+            
         ]);
-
+    
         $credentials = $request->only('email', 'password');
-
+    
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-
+    
             // Kiểm tra vai trò của người dùng
             switch ($user->role) {
                 case 'admin':
@@ -40,12 +41,29 @@ class CustomAuthController extends Controller
                 case 'custom':
                     return redirect()->intended('home')->withSuccess('Signed in');
                 default:
-                redirect("login")->withSuccess('Login FAIL'); // gọi router có tên login
+                    return redirect("login")->withSuccess('Login FAIL'); // gọi router có tên login
             }
         }
-
-        redirect("login")->withSuccess('Login FAIL');
+    
+        return redirect("login")->withErrors(['email' => 'Email hoặc mật khẩu không chính xác']); // Thông báo lỗi
     }
+    
+    public function checkPassword(Request $request)
+    {
+        $request->validate([
+            'password' => [
+                'required',
+                'regex:/^\S*$/',
+                'regex:/^[^\s]+$/', // Không chứa khoảng trắng
+                'regex:/^[\x20-\x7E]*$/', // Không chứa ký tự đặc biệt
+            ],
+        ], [
+            'password.regex' => 'Email hoặc mật khẩu không chính xác',
+        ]);
+    
+        // Tiếp tục xử lý logic kiểm tra người dùng
+    }
+    
     public function gohome(Request $request)
     {
         // Kiểm tra xem người dùng đã đăng nhập hay chưa
