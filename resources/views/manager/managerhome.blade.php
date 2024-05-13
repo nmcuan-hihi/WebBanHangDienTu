@@ -39,7 +39,12 @@
             <td style="text-align:right;">{{ $product->product_quantity }}</td>
             <td style="text-align:right;">{{ $product->product_price }}</td>
             <td style="text-align:center;">
-                <a href="#" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                 <a href="#" class="btn btn-warning btn-sm">
+                        <span class="material-icons">edit</span> Sửa
+                    </a>
+                    <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chăc muốn xóa?')">
+                        <span class="material-icons">delete</span> Xóa
+                    </a>
             </td>
         </tr>
         @endforeach
