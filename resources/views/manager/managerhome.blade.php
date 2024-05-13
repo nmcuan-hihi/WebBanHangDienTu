@@ -9,6 +9,9 @@
     </div>
     @endif
 
+    <a href="{{ route('addcategory') }}" class="btn btn-info btn-sm">
+        <span class="material-icons">visibility</span> Thêm danh mục
+    </a>
     
 
 </div>

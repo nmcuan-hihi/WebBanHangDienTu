@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-
+use App\Models\Category;
 class CustomAuthController extends Controller
 {
     public function toLogin()
@@ -75,5 +75,26 @@ class CustomAuthController extends Controller
 
         // Nếu người dùng chưa đăng nhập
         return redirect("login")->withSuccess('You are not allowed to access');
+    }
+
+    public function toAddCategory()
+    {
+        return view('manager.addcategory');
+    }
+
+    public function addCategory(Request $request)
+    {
+        // Validate form data
+        $request->validate([
+            'category_name' => 'required|string|max:255',
+        ]);
+    
+        // Tạo mới danh mục
+        $category = new Category();
+        $category->category_name = $request->input('category_name');
+        $category->save();
+    
+        // Chuyển hướng về trang danh sách danh mục hoặc trang khác tuỳ theo yêu cầu của bạn
+        return view('manager.managerhome')->with('success', 'Danh mục đã được thêm mới thành công.');
     }
 }
