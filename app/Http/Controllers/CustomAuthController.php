@@ -44,8 +44,8 @@ class CustomAuthController extends Controller
         // Thêm các quy tắc kiểm tra dữ liệu khác nếu cần thiết
     ]);
 
-    // Lưu hình ảnh vào storage
-    $imagePath = $request->file('image')->store('images');
+   // Lưu dữ liệu hình ảnh dưới dạng base64
+   $imageData = base64_encode(file_get_contents($request->file('image')->path()));
 
     // Tạo một bản ghi mới trong bảng users
     $user = User::create([
@@ -61,8 +61,8 @@ class CustomAuthController extends Controller
         'phone' => $request->phone,
         'address' => $request->address,
         'sex' => $request->sex,
-        'image' => $imagePath, // Lưu đường dẫn hình ảnh vào cơ sở dữ liệu
-        // Thêm các trường dữ liệu khác nếu cần thiết
+        'image' => $imageData, // Lưu đường dẫn hình ảnh vào cơ sở dữ liệu
+        
     ]);
 
     // Chuyển hướng người dùng đến trang đăng nhập
