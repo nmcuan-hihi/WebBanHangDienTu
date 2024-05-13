@@ -95,7 +95,6 @@ class CustomAuthController extends Controller
         return redirect("login")->withSuccess('You are not allowed to access');
     }
 
-<<<<<<< HEAD
     // chuyển sang trang sửa thông tin user
     public function editUser(Request $request)
     {
@@ -147,7 +146,6 @@ class CustomAuthController extends Controller
         // Redirect hoặc trả về phản hồi
         return redirect()->route('manageruser')->with('success', 'User information updated successfully.');
     }
-=======
     //delete user
     
     public function deleteUser(Request $request)
@@ -172,5 +170,4 @@ class CustomAuthController extends Controller
     
     
    
->>>>>>> Thu_deleteUser
 }
