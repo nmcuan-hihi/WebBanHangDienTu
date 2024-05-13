@@ -27,7 +27,7 @@
                 </td>
                 <td>${{ $item['price'] * $item['quantity'] }}</td>
                 <td>
-                    <form action="{{ route('cart.remove') }}" method="post">
+                    <form id="removeForm{{ $item['id'] }}" action="{{ route('cart.remove') }}" method="post" onsubmit="return confirmDelete()">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $item['id'] }}">
                         <button type="submit">Remove</button>
@@ -35,6 +35,15 @@
                 </td>
             </tr>
         @endforeach
+    </tbody>
+</table>
+
+<script>
+    function confirmDelete() {
+        return confirm("Bạn có muốn xóa sản phẩm này không?");
+    }
+</script>
+
 
     </tbody>
 </table>
