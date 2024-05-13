@@ -35,7 +35,7 @@ class CustomAuthController extends Controller
             // Kiểm tra vai trò của người dùng
             switch ($user->role) {
                 case 'admin':
-                    return redirect()->intended('manager')->withSuccess('Signed in with admin');
+                    return redirect()->intended('home')->withSuccess('Signed in with admin');
                     break;
                 case 'custom':
                     return redirect()->intended('home')->withSuccess('Signed in');
