@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             @foreach($users as $user)
-            <tr>
+            <tr>            
                 <td><img src="data:image;base64,{{ $user->userProfile->image }}" alt="image" style="width: 50px; height: 50px;" /></td>
                 <td>{{ $user->userProfile->name }}</td>
                 <td>{{ $user->email }}</td>
@@ -31,7 +31,7 @@
                 <td>{{ $user->userProfile->sex }}</td>
                 <td>{{ $user->role }}</td>
                 <td>
-                   
+
                 </td>
             </tr>
             @endforeach
@@ -43,7 +43,8 @@
                 @if (!$users->onFirstPage())
                 <li class="page-item">
                     <a href="{{ $users->previousPageUrl() }}" class="page-link">
-                        <span aria-hidden="true"><</span>
+                        <span aria-hidden="true">
+                            << /span>
                     </a>
                 </li>
                 @endif
