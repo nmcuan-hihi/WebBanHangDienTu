@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             @foreach($users as $user)
-            <tr>            
+            <tr>
                 <td><img src="data:image;base64,{{ $user->userProfile->image }}" alt="image" style="width: 50px; height: 50px;" /></td>
                 <td>{{ $user->userProfile->name }}</td>
                 <td>{{ $user->email }}</td>
@@ -31,8 +31,13 @@
                 <td>{{ $user->userProfile->sex }}</td>
                 <td>{{ $user->role }}</td>
                 <td>
+<<<<<<< HEAD
                 <a href="{{ route('user.showitem', ['id' => $user->id]) }}" class="btn btn-warning btn-sm">
                 <span class="material-icons">visibility</span> Chi tiết
+=======
+                    <a href="{{ route('user.edit', ['id' => $user->id]) }}" class="btn btn-warning btn-sm">
+                        <span class="material-icons">edit</span> Sửa
+>>>>>>> Thu_editUser
                     </a>
                 </td>
             </tr>
