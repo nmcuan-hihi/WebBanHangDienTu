@@ -31,7 +31,10 @@
                 <td>{{ $user->userProfile->sex }}</td>
                 <td>{{ $user->role }}</td>
                 <td>
-
+                   
+                    <a href="{{ route('user.delete', ['id' => $user->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chăc muốn xóa?')">
+                        <span class="material-icons">delete</span> Xóa
+                    </a>
                 </td>
             </tr>
             @endforeach

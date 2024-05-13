@@ -93,5 +93,29 @@ class CustomAuthController extends Controller
         // Nếu người dùng chưa đăng nhập
         return redirect("login")->withSuccess('You are not allowed to access');
     }
+
+    //delete user
+    
+    public function deleteUser(Request $request)
+    {
+        $user_id = $request->get('id');
+        
+        // Tìm người dùng dựa trên ID
+        $user = User::find($user_id);
+    
+        if ($user) {
+            // Xóa hồ sơ người dùng nếu tồn tại
+            $user->userProfile()->delete();
+    
+            // Xóa người dùng
+            $user->delete();
+    
+            return redirect("manageruser")->withSuccess('Delete ok');
+        } else {
+            return redirect("manageruser")->withSuccess('User not found');
+        }
+    }
+    
+    
    
 }
