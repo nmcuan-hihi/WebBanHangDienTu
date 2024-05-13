@@ -147,7 +147,7 @@ class CustomAuthController extends Controller
         // Redirect hoặc trả về phản hồi
         return redirect()->route('manageruser')->with('success', 'User information updated successfully.');
     }
-
+=======
     //delete user
     
     public function deleteUser(Request $request)
@@ -172,5 +172,5 @@ class CustomAuthController extends Controller
     
     
    
-
+>>>>>>> Thu_deleteUser
 }
