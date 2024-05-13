@@ -35,6 +35,11 @@
                 <span class="material-icons">visibility</span> Chi tiết
                     <a href="{{ route('user.edit', ['id' => $user->id]) }}" class="btn btn-warning btn-sm">
                         <span class="material-icons">edit</span> Sửa
+
+                   
+                    <a href="{{ route('user.delete', ['id' => $user->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chăc muốn xóa?')">
+                        <span class="material-icons">delete</span> Xóa
+
                     </a>
                 </td>
             </tr>
