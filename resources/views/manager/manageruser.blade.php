@@ -31,7 +31,9 @@
                 <td>{{ $user->userProfile->sex }}</td>
                 <td>{{ $user->role }}</td>
                 <td>
-
+                <a href="{{ route('user.showitem', ['id' => $user->id]) }}" class="btn btn-warning btn-sm">
+                <span class="material-icons">visibility</span> Chi tiết
+                    </a>
                 </td>
             </tr>
             @endforeach

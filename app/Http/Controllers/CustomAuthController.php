@@ -93,5 +93,14 @@ class CustomAuthController extends Controller
         // Nếu người dùng chưa đăng nhập
         return redirect("login")->withSuccess('You are not allowed to access');
     }
+
+    //hien thi chi tiet thong tin user
+    public function showinfouser(Request $request)
+    {
+        $user_id = $request->get('id');
+        $user = User::find($user_id);
+        
+        return view('manager.itemuser', ['user' => $user]);
+    }
    
 }
