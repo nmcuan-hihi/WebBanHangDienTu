@@ -11,12 +11,12 @@
     @endif -->
 
     <div class="float-right ">
-        <!-- <a href="{{ route('addproduct') }}" class="btn btn-info btn-sm">
+        <a href="{{ route('addproduct') }}" class="btn btn-info btn-sm">
             <span class="material-icons icon-small">visibility</span> AddProduct
         </a>
         <a href="{{ route('add.manufacturer') }}" class="btn btn-info btn-sm">
             <span class="material-icons icon-small">visibility</span> AddManufacturers
-        </a> -->
+        </a>
         <form action="{{ route('product.search') }}" method="GET" class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
