@@ -2,46 +2,58 @@
 
 @section('content')
 
-
-<div class="container mt-5">
-    <!-- @if (Session::has('success'))
-    <div class="alert alert-success">
-        <i class="fas fa-check-circle"></i> {{ Session::get('success') }}
-    </div>
-    @endif -->
-
-
-
-
+<div class="container mt-3">
+    <form id="filterForm" action="{{ route('filterProducts') }}" method="GET">
+        <div class="d-flex mb-3">
+            <div class="form-group mr-2">
+                <label for="category" class="mr-2">Select Category:</label>
+                <select name="category" id="category" class="form-control mr-2">
+                    <option value="">All Categories</option>
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->category_id }}" {{ request('category') == $category->category_id ? 'selected' : '' }}>
+                        {{ $category->category_name }}
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group mr-2">
+                <label for="sort" class="mr-2">Sort by Price:</label>
+                <select name="sort" id="sort" class="form-control mr-2">
+                    <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>🔼 Ascending</option>
+                    <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>🔽 Descending</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="height: 40px;">Apply Filter</button>
+    </form>
 </div>
 
-<div class="container mt-5">
+<!-- Hiển thị sản phẩm -->
+<div class="container mt-3">
     <div class="row">
         @foreach ($products as $product)
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="data:image;base64,{{ $product->product_image }}" alt="Product Image" class="card-img-top"
-                        style="height: 200px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $product->product_name }}</h5>
-                        <p class="card-text">Price: ${{ $product->product_price }}</p>
-                        <form action="#" method="post">
-                            @csrf
-                            <input type="hidden" name="product_id" value="{{ $product->product_id }}">
-                            <input type="hidden" name="product" value="{{ json_encode($product) }}">
-                            <button type="submit" class="btn btn-info btn-sm">
-                                <span class="material-icons icon-small">add_shopping_cart</span> Add to Cart
-                            </button>
-                        </form>
-
-                    </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="data:image;base64,{{ $product->product_image }}" alt="Product Image" class="card-img-top" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $product->product_name }}</h5>
+                    <p class="card-text">Price: ${{ $product->product_price }}</p>
+                    <form action="#" method="post">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                        <input type="hidden" name="product" value="{{ json_encode($product) }}">
+                        <button type="submit" class="btn btn-info btn-sm">
+                            <span class="material-icons icon-small">add_shopping_cart</span> Add to Cart
+                        </button>
+                    </form>
                 </div>
             </div>
-
+        </div>
         @endforeach
-
     </div>
 </div>
+
+
 
 <div class="d-flex justify-content-center mt-4">
     <ul class="pagination">
