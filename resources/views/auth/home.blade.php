@@ -54,7 +54,7 @@
     </div>
 </div>
 
-<div class="d-flex justify-content-center mt-4">
+<!-- <div class="d-flex justify-content-center mt-4">
     <ul class="pagination">
         @if ($products->onFirstPage())
             <li class="page-item disabled"><span class="page-link">Previous</span></li>
@@ -73,7 +73,7 @@
             <li class="page-item disabled"><span class="page-link">Next</span></li>
         @endif
     </ul>
-</div>
+</div> -->
 
 
 
