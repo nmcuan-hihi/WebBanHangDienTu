@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div class="container mt-5">
+<div class="container">
     <!-- @if (Session::has('success'))
     <div class="alert alert-success">
         <i class="fas fa-check-circle"></i> {{ Session::get('success') }}
@@ -22,6 +22,7 @@
     <thead>
         <tr>
             <th style="text-align:left;">ID</th>
+            <th style="text-align:left;">Image</th>
             <th style="text-align:left;">Name</th>
             <th style="text-align:right;">Manufacturer</th>
             <th style="text-align:right;">Quantity</th>
@@ -33,9 +34,11 @@
         @foreach($products as $product)
         <tr>
             <td>{{ $product->product_id }}</td>
+            <td> <img src="data:image;base64,{{ $product->product_image }}" alt="image" id="preview" style="width: 40px; height: 40px;"/>
+            </td>
             <td>{{ $product->product_name }}</td>
 
-            <td style="text-align:right;"> {{ $product->category->category_name }}</td>
+            <td style="text-align:right;"> {{ $product->manufacturer->manufacturer_name }}</td>
             <td style="text-align:right;">{{ $product->product_quantity }}</td>
             <td style="text-align:right;">{{ $product->product_price }}</td>
             <td style="text-align:center;">

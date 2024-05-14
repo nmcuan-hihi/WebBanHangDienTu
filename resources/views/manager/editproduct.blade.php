@@ -6,6 +6,7 @@
     <h1>Edit Product</h1>
     <form action="{{ route('conflim.edit.product') }}" method="POST" enctype="multipart/form-data">
         @csrf
+        <input name="product_id" type="hidden" value="{{ $product->product_id }}">
         <div class="form-group">
             <label for="product_name">Product Name:</label>
             <input value="{{ $product->product_name }}" type="text" id="product_name" name="product_name" class="form-control text-primary">
@@ -14,7 +15,7 @@
 
             <div class="form-group">
                 <label for="category_id">Category:</label>
-                <select name="category_id" id="category_id" class="form-control">
+                <select name="category_id" id="category_id" class="form-control text-primary">
                     @foreach ($categories as $category)
                         <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
                     @endforeach
@@ -23,7 +24,7 @@
 
             <div class="form-group">
                 <label for="manufacturer_id">Manufacturer:</label>
-                <select name="manufacturer_id" id="manufacturer_id" class="form-control">                
+                <select name="manufacturer_id" id="manufacturer_id" class="form-control text-primary">                
                     @foreach ($manufacturers as $manufacturer)
                         <option value="{{ $manufacturer->manufacturer_id }}">{{ $manufacturer->manufacturer_name }}</option>
                     @endforeach
@@ -52,7 +53,7 @@
             <input value="{{ $product->product_quantity }}" type="text" id="product_quantity" name="product_quantity" class="form-control  text-primary">
         </div>
 
-        <button type="submit" class="btn btn-primary">Add Product</button>
+        <button type="submit" class="btn btn-primary">Edit Product</button>
     </form>
 </div>
 <script>
