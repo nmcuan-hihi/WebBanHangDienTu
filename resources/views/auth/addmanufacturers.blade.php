@@ -1,3 +1,6 @@
+@extends('nav.header')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -146,3 +149,5 @@ tbody tr:hover {
 }
 
 </style>
+
+@endsection

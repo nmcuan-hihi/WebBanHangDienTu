@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 class ManufacturersController extends Controller
 {
+    
     public function showAddForm()
     {
         $manufacturers = Manufacturer::all();

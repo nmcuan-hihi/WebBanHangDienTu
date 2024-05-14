@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Manufacturer;
 use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
+   
+   
     public function showAddForm()
     {
-        return view('./auth/addproduct');
+        $manufacturers = Manufacturer::all(); 
+        return view('./auth/addproduct',['manufacturers' => $manufacturers]);
     }
     
 

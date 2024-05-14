@@ -23,6 +23,7 @@ Route::get('product/image/{id}', [ProductController::class, 'getProductImage'])-
 Route::get('/search', [ProductController::class, 'search'])->name('product.search');
 
 
+
 Route::post('cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('cart', [CartController::class, 'index'])->name('add.cart');
 Route::post('cart/updateQuantity', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');
