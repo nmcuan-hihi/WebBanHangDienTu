@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
       <div class="col-md-4">
         <div class="card" style="border: 2px solid black;">
-          <h3 class="card-header bg-dark text-center text-light">LOGIN</h3>
+          <h3 class="card-header bg-dark text-center text-light">Change Password</h3>
           <div class="card-body">
             <div class="container">
             
