@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <div class="container mt-5">
     <!-- @if (Session::has('success'))
     <div class="alert alert-success">
@@ -10,20 +9,28 @@
     </div>
     @endif -->
 
-    <div class="float-right ">
-        <a href="{{ route('addproduct') }}" class="btn btn-info btn-sm">
-            <span class="material-icons icon-small">visibility</span> AddProduct
-        </a>
-        <a href="{{ route('add.manufacturer') }}" class="btn btn-info btn-sm">
-            <span class="material-icons icon-small">visibility</span> AddManufacturers
-        </a>
-        <form action="{{ route('product.search') }}" method="GET" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+    <div class="row justify-content-end">
+        <div class="col-auto">
+            <a href="{{ route('addproduct') }}" class="btn btn-info btn-sm">
+                <span class="material-icons icon-small">add_circle</span> Add Product
+            </a>
+        </div>
+        <div class="col-auto">
+            <a href="{{ route('add.manufacturer') }}" class="btn btn-info btn-sm">
+                <span class="material-icons icon-small">business</span> Add Manufacturers
+            </a>
+        </div>
+        <div class="col-auto">
+            <form action="{{ route('product.search') }}" method="GET" class="form-inline">
+                <div class="input-group">
+                    <input class="form-control" type="search" name="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-success" type="submit"><span class="material-icons">search</span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-
-
 </div>
 
 <div class="container mt-5">
@@ -40,42 +47,39 @@
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->product_id }}">
                             <input type="hidden" name="product" value="{{ json_encode($product) }}">
-                            <button type="submit" class="btn btn-info btn-sm">
+                            <button type="submit" class="btn btn-info btn-sm btn-block">
                                 <span class="material-icons icon-small">add_shopping_cart</span> Add to Cart
                             </button>
                         </form>
-
                     </div>
                 </div>
             </div>
-
         @endforeach
-
     </div>
 </div>
 
 <div class="d-flex justify-content-center mt-4">
-    <ul class="pagination">
-        @if ($products->onFirstPage())
-            <li class="page-item disabled"><span class="page-link">Previous</span></li>
-        @else
-            <li class="page-item"><a href="{{ $products->previousPageUrl() }}" class="page-link">Previous</a></li>
-        @endif
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @if ($products->onFirstPage())
+                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+            @else
+                <li class="page-item"><a href="{{ $products->previousPageUrl() }}" class="page-link">&laquo;</a></li>
+            @endif
 
-        @for ($i = 1; $i <= $products->lastPage(); $i++)
-            <li class="page-item {{ $products->currentPage() == $i ? 'active' : '' }}"><a href="{{ $products->url($i) }}"
-                    class="page-link">{{ $i }}</a></li>
-        @endfor
+            @for ($i = 1; $i <= $products->lastPage(); $i++)
+                <li class="page-item {{ $products->currentPage() == $i ? 'active' : '' }}"><a href="{{ $products->url($i) }}"
+                        class="page-link">{{ $i }}</a></li>
+            @endfor
 
-        @if ($products->hasMorePages())
-            <li class="page-item"><a href="{{ $products->nextPageUrl() }}" class="page-link">Next</a></li>
-        @else
-            <li class="page-item disabled"><span class="page-link">Next</span></li>
-        @endif
-    </ul>
+            @if ($products->hasMorePages())
+                <li class="page-item"><a href="{{ $products->nextPageUrl() }}" class="page-link">&raquo;</a></li>
+            @else
+                <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+            @endif
+        </ul>
+    </nav>
 </div>
-
-
 
 <div class="clearfix"></div>
 

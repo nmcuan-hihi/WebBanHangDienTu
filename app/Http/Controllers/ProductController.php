@@ -6,15 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Manufacturer;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
-   
+  
    
     public function showAddForm()
     {
         $manufacturers = Manufacturer::all(); 
-        return view('./auth/addproduct',['manufacturers' => $manufacturers]);
+        $categories = Category::all();
+        return view('./auth/addproduct',['manufacturers' => $manufacturers],['categories' => $categories]);
     }
     
 
