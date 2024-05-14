@@ -14,6 +14,7 @@ class CustomAuthController extends Controller
 {
     public function toLogin()
     {
+        
         return view('auth.login');
     }
     public function signout()

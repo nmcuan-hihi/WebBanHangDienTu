@@ -43,7 +43,7 @@
                         <input type="hidden" name="product_id" value="{{ $product->product_id }}">
                         <input type="hidden" name="product" value="{{ json_encode($product) }}">
                         <button type="submit" class="btn btn-info btn-sm">
-                            <span class="material-icons icon-small">add_shopping_cart</span> Add to Cart
+                            <a href="{{ route('addcart', ['id' => $product->product_id]) ) }}"><span class="material-icons icon-small">add_shopping_cart</span> Add to Cart</a>
                         </button>
                     </form>
                 </div>

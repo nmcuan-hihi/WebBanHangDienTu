@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -12,8 +13,13 @@ Route::get('manager', [CustomAuthController::class, 'gomanager'])->name('manager
 
 
 Route::get('home', [ProductController::class, 'index'])->name('filterProducts');
-Route::get('home', [ProductController::class, 'toproductedit'])->name('product.edit');
+Route::get('product', [ProductController::class, 'toproductedit'])->name('product.edit');
 Route::post('product', [ProductController::class, 'productedit'])->name('conflim.edit.product');
+
+// cart
+Route::get('cart', [CartController::class, 'tocart'])->name('cart');
+Route::get('cart', [CartController::class, 'tocart'])->name('addcart');
+
 
 Route::get('/', function () {
     return view('auth.login');
