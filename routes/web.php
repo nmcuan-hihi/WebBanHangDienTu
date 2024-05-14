@@ -9,7 +9,11 @@ Route::post('login', [CustomAuthController::class, 'checkUser'])->name('user.che
 Route::get('signout', [CustomAuthController::class, 'signout'])->name('signout');
 Route::get('home', [CustomAuthController::class, 'gohome'])->name('home');
 Route::get('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
+
+
 Route::get('home', [ProductController::class, 'index'])->name('filterProducts');
+Route::get('home', [ProductController::class, 'toproductedit'])->name('product.edit');
+Route::post('product', [ProductController::class, 'productedit'])->name('conflim.edit.product');
 
 Route::get('/', function () {
     return view('auth.login');

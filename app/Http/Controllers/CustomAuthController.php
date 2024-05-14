@@ -69,7 +69,7 @@ class CustomAuthController extends Controller
         // Kiểm tra xem người dùng đã đăng nhập hay chưa
         if (Auth::check()) {
             // // Lấy danh sách người dùng phân trang
-            $products = Product::paginate(3);
+            $products = Product::paginate(7);
            // Lấy danh sách danh mục
            $categories = Category::all();
            return view('manager.managerhome', compact('products', 'categories'));
