@@ -49,7 +49,28 @@ class CartController extends Controller
         // Cập nhật giỏ hàng trong session
         Session::put('cart', $cart);
 
-        return redirect()->route('cart')->with('success', 'Product added to cart successfully.');
+       //  trả về 
+       return redirect()->back()->with('success', 'Product add from cart successfully!');
     }
+    public function removetocart(Request $request)
+    {
+        $product_id = $request->get('product_id');
+        // Lấy giỏ hàng từ session
+        $cart = Session::get('cart', []);
 
+        // Kiểm tra xem sản phẩm có tồn tại trong giỏ hàng không
+        if (isset($cart[$product_id])) {
+            // Xóa sản phẩm khỏi giỏ hàng
+            unset($cart[$product_id]);
+
+            // Lưu giỏ hàng cập nhật vào session
+            Session::put('cart', $cart);
+
+            // Redirect hoặc trả về phản hồi phù hợp
+            return redirect()->back()->with('success', 'Product removed from cart successfully!');
+        }
+
+        // Nếu sản phẩm không tồn tại trong giỏ hàng
+        return redirect()->back()->with('error', 'Product not found in cart!');
+    }
 }

@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container pt-3">
+    @if (Session::has('success'))
+    <div class="alert alert-success">
+        <i class="fas fa-check-circle"></i> {{ Session::get('success') }}
+    </div>
+    @endif
     @if(session('cart') && count(session('cart')) > 0)
     <table class="table table-striped">
         <thead>
@@ -29,7 +34,7 @@
                 </td>
                 <td>${{ $item['price'] * $item['quantity'] }}</td>
                 <td>
-                    <form action="#" method="post">
+                    <form action="{{ route('remove.cart') }}" method="post">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $item['id'] }}">
                         <button type="submit" class="btn btn-sm btn-danger">Remove</button>
@@ -50,7 +55,7 @@
                 <th>Action</th>
             </tr>
         </thead>
-       
+
     </table>
     <div class="alert alert-info text-center" role="alert">
         Giỏ hàng trống, hãy thêm các sản phẩm tốt của chúng tôi vào giở hàng nào ! Hehe

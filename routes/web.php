@@ -19,6 +19,7 @@ Route::post('product', [ProductController::class, 'productedit'])->name('conflim
 // cart
 Route::post('cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('cart', [CartController::class, 'tocart'])->name('add.cart');
+Route::post('removecart', [CartController::class, 'removetocart'])->name('remove.cart');
 
 
 Route::get('/', function () {

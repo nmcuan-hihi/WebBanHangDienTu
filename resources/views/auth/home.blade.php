@@ -3,6 +3,11 @@
 @section('content')
 
 <div class="container mt-3">
+@if (Session::has('success'))
+    <div class="alert alert-success">
+        <i class="fas fa-check-circle"></i> {{ Session::get('success') }}
+    </div>
+    @endif
     <form id="filterForm" action="{{ route('filterProducts') }}" method="GET">
         <div class="d-flex mb-3">
             <div class="form-group mr-2">
