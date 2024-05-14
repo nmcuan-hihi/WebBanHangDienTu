@@ -38,13 +38,13 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $product->product_name }}</h5>
                     <p class="card-text">Price: ${{ $product->product_price }}</p>
-                    <form action="#" method="post">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $product->product_id }}">
-                        <input type="hidden" name="product" value="{{ json_encode($product) }}">
-                        <button type="submit" class="btn btn-info btn-sm">
-                            <a href="{{ route('addcart', ['id' => $product->product_id]) ) }}"><span class="material-icons icon-small">add_shopping_cart</span> Add to Cart</a>
-                        </button>
+                    <form action="{{ route('cart') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                            <input type="hidden" name="product" value="{{ json_encode($product) }}">
+                            <button type="submit" class="btn btn-info btn-sm btn-block">
+                                <span class="material-icons icon-small">add_shopping_cart</span> Add to Cart
+                            </button>
                     </form>
                 </div>
             </div>

@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Product;
-use GuzzleHttp\Psr7\Request;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
-class CartController extends BaseController
+class CartController extends Controller
 {
     public function tocart()
     {
@@ -22,27 +19,25 @@ class CartController extends BaseController
         // Nếu người dùng chưa đăng nhập
         return redirect("login")->withSuccess('You are not allowed to access');
     }
-    public function addtocart(Request $request)
+    public function addToCart(Request $request)
     {
-        $product_id = $request->get('id');
-        $quantity = $request->get('quantity', 1); // Mặc định số lượng là 1 nếu không có trong request
-    
+        $product = json_decode($request->input('product'));
+        $quantity = $request->input('quantity', 1);
+
+        if (!$product) {
+            return redirect()->back()->with('error', 'Product not found.');
+        }
+
         // Lấy giỏ hàng từ session
         $cart = Session::get('cart', []);
-    
-        // Tìm sản phẩm từ cơ sở dữ liệu
-        $product = Product::find($product_id);
-        if (!$product) {
-            return redirect()->back()->with('error', 'Product not found!');
-        }
-    
+
         // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
-        if (isset($cart[$product_id])) {
+        if (isset($cart[$product->product_id])) {
             // Nếu sản phẩm đã tồn tại trong giỏ hàng, tăng số lượng lên
-            $cart[$product_id]['quantity'] += $quantity;
+            $cart[$product->product_id]['quantity'] += $quantity;
         } else {
             // Nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm sản phẩm mới vào giỏ hàng
-            $cart[$product_id] = [
+            $cart[$product->product_id] = [
                 'id' => $product->product_id,
                 'name' => $product->product_name,
                 'price' => $product->product_price,
@@ -50,12 +45,11 @@ class CartController extends BaseController
                 // Các thông tin sản phẩm khác bạn muốn lưu
             ];
         }
-    
-        // Lưu lại giỏ hàng vào session
+
+        // Cập nhật giỏ hàng trong session
         Session::put('cart', $cart);
-    
-        // Redirect với thông báo thành công
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+
+        return redirect()->route('cart')->with('success', 'Product added to cart successfully.');
     }
-    
+
 }
