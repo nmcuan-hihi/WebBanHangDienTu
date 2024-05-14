@@ -10,32 +10,46 @@ use Illuminate\Support\Facades\Session;
 
 class ManufacturersController extends Controller
 {
+    // Phương thức hiển thị form chỉnh sửa nhà sản xuất
     public function edit($id)
-{
-    $manufacturer = Manufacturer::find($id);
-    return view('auth.editmanufacturers', compact('manufacturer'));
-}
+    {
+        // Tìm nhà sản xuất dựa trên id được cung cấp
+        $manufacturer = Manufacturer::find($id);
 
-public function update(Request $request, $id)
-{
-    $manufacturer = Manufacturer::find($id);
-    $manufacturer->manufacturer_name = $request->input('manufacturer_name');
-    $manufacturer->manufacturer_phone = $request->input('manufacturer_phone');
-    $manufacturer->manufacturer_email = $request->input('manufacturer_email');
-    $manufacturer->save();
+        // Trả về view 'auth.editmanufacturers' với thông tin nhà sản xuất
+        return view('auth.editmanufacturers', compact('manufacturer'));
+    }
 
-    return redirect()->route('add.manufacturer', $id)->with('success', 'Manufacturer updated successfully.');
-}
+    // Phương thức cập nhật thông tin nhà sản xuất
+    public function update(Request $request, $id)
+    {
+        // Tìm nhà sản xuất cần cập nhật
+        $manufacturer = Manufacturer::find($id);
 
+        // Cập nhật thông tin nhà sản xuất từ dữ liệu gửi qua biểu mẫu
+        $manufacturer->manufacturer_name = $request->input('manufacturer_name');
+        $manufacturer->manufacturer_phone = $request->input('manufacturer_phone');
+        $manufacturer->manufacturer_email = $request->input('manufacturer_email');
+        $manufacturer->save();
 
+        // Chuyển hướng người dùng đến trang hiển thị nhà sản xuất với thông báo
+        return redirect()->route('add.manufacturer', $id)->with('success', 'Manufacturer updated successfully.');
+    }
+
+    // Phương thức hiển thị form thêm mới nhà sản xuất
     public function showAddForm()
     {
+        // Lấy danh sách tất cả các nhà sản xuất
         $manufacturers = Manufacturer::all();
+
+        // Trả về view 'auth.addmanufacturers' với danh sách nhà sản xuất
         return view('auth.addmanufacturers', ['manufacturers' => $manufacturers]);
     }
-    // Lưu nhà sản xuất mới vào cơ sở dữ liệu
+
+    // Phương thức lưu nhà sản xuất mới vào cơ sở dữ liệu
     public function store(Request $request)
     {
+        // Xác thực dữ liệu gửi từ biểu mẫu
         $validator = Validator::make($request->all(), [
             'manufacturer_name' => 'required',
             'manufacturer_phone' => 'required|numeric|digits:10',
@@ -48,23 +62,22 @@ public function update(Request $request, $id)
             'manufacturer_email.required' => 'The email field is required.',
             'manufacturer_email.email' => 'The email must be a valid email address.',
         ]);
-    
+
+        // Nếu dữ liệu không hợp lệ, hiển thị thông báo lỗi và chuyển hướng về trang trước
         if ($validator->fails()) {
             Session::flash('error', $validator->errors()->first());
             return redirect()->back();
         }
-        
 
-        // Tạo một nhà sản xuất mới
+        // Tạo mới một nhà sản xuất và lưu vào cơ sở dữ liệu
         Manufacturer::create([
             'manufacturer_name' => $request->manufacturer_name,
             'manufacturer_phone' => $request->manufacturer_phone,
             'manufacturer_email' => $request->manufacturer_email,
         ]);
 
-        // Chuyển hướng về trang trước đó hoặc trang nào đó khác
+        // Hiển thị thông báo thành công và chuyển hướng về trang thêm mới nhà sản xuất
         Session::flash('success', 'Manufacturer added successfully!');
-
         return redirect()->route('add.manufacturer');
     }
 }

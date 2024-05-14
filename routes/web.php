@@ -14,7 +14,6 @@ Route::get('login', [CustomAuthController::class, 'toLogin'])->name('login');
 Route::post('login', [CustomAuthController::class, 'checkUser'])->name('user.checkUser');
 
 Route::get('signout', [CustomAuthController::class, 'signout'])->name('signout');
-
 Route::get('home', [ProductController::class, 'index'])->name('home');
 
 Route::get('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
@@ -23,9 +22,6 @@ Route::get('addproduct', [ProductController::class, 'showAddForm'])->name('addpr
 Route::post('addproduct', [ProductController::class, 'store'])->name('store.product');
 Route::get('product/image/{id}', [ProductController::class, 'getProductImage'])->name('get.product.image');
 Route::get('/search', [ProductController::class, 'search'])->name('product.search');
-
-
-
 Route::post('cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('cart', [CartController::class, 'index'])->name('add.cart');
 Route::post('cart/updateQuantity', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');

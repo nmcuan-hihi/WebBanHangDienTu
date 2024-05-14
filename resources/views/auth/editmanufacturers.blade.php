@@ -15,8 +15,8 @@
             <label for="manufacturer_phone">Manufacturer Phone:</label>
             <input type="text" class="form-control" id="manufacturer_phone" name="manufacturer_phone" value="{{ $manufacturer->manufacturer_phone }}">
         </div>
-        <div class="form-group">
-            <label for="manufacturer_email">Manufacturer Email:</label>
+        <div class="form-group">aas
+            <label for="manufacturer_email">Manufaacturer Email:</label>
             <input type="email" class="form-control" id="manufacturer_email" name="manufacturer_email" value="{{ $manufacturer->manufacturer_email }}">
         </div>
         <button type="submit" class="btn btn-primary">Update Manufacturer</button>
