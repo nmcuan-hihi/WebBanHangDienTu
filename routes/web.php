@@ -7,6 +7,8 @@ use App\Http\Controllers\ManufacturersController;
 use App\Http\Controllers\CartController;
 Route::get('addmanufacturers', [ManufacturersController::class, 'showAddForm'])->name('add.manufacturer');
 Route::post('addmanufacturers', [ManufacturersController::class, 'store'])->name('store.manufacturer');
+Route::get('/edit/manufacturer/{manufacturer_id}',[ManufacturersController::class, 'edit'])->name('edit.manufacturer');
+Route::put('/update/manufacturer/{manufacturer_id}',[ManufacturersController::class, 'update'])->name('update.manufacturer');
 
 Route::get('login', [CustomAuthController::class, 'toLogin'])->name('login');
 Route::post('login', [CustomAuthController::class, 'checkUser'])->name('user.checkUser');

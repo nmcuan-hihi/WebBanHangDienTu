@@ -41,6 +41,7 @@
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Email</th>
+                        <th>Acition</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +50,11 @@
                             <td>{{ $manufacturer->manufacturer_name }}</td>
                             <td>{{ $manufacturer->manufacturer_phone }}</td>
                             <td>{{ $manufacturer->manufacturer_email }}</td>
+                            <td>
+                                <a href="{{ route('edit.manufacturer', $manufacturer->manufacturer_id) }}" class="btn btn-info btn-sm">
+                                    <span class="material-icons icon-small">edit</span> Edit
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

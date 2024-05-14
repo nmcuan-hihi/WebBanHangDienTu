@@ -10,7 +10,24 @@ use Illuminate\Support\Facades\Session;
 
 class ManufacturersController extends Controller
 {
-    
+    public function edit($id)
+{
+    $manufacturer = Manufacturer::find($id);
+    return view('auth.editmanufacturers', compact('manufacturer'));
+}
+
+public function update(Request $request, $id)
+{
+    $manufacturer = Manufacturer::find($id);
+    $manufacturer->manufacturer_name = $request->input('manufacturer_name');
+    $manufacturer->manufacturer_phone = $request->input('manufacturer_phone');
+    $manufacturer->manufacturer_email = $request->input('manufacturer_email');
+    $manufacturer->save();
+
+    return redirect()->route('add.manufacturer', $id)->with('success', 'Manufacturer updated successfully.');
+}
+
+
     public function showAddForm()
     {
         $manufacturers = Manufacturer::all();
