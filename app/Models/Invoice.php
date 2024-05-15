@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Invoice extends Model
 {
     use HasFactory;
+    protected $table = 'invoice';
     protected $primaryKey = 'invoice_id';
     public $incrementing = true;
 
