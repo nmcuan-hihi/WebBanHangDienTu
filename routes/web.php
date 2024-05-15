@@ -14,6 +14,8 @@ Route::get('manager', [CustomAuthController::class, 'gomanager'])->name('manager
 Route::get('home', [ProductController::class, 'index'])->name('filterProducts');
 Route::get('home', [ProductController::class, 'toproductedit'])->name('product.edit');
 Route::post('product', [ProductController::class, 'productedit'])->name('conflim.edit.product');
+// delete product
+Route::get('deleteProduct',[ProductController:: class, 'delete'])->name('deleteProduct');
 
 Route::get('/', function () {
     return view('auth.login');

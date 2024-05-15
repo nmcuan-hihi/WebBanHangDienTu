@@ -87,4 +87,9 @@ class ProductController extends Controller
     return redirect()->route('manager')->with('success', 'Successfully updated!');
 }
 
+public function delete(Request $request ){
+    $product_id = $request->get('id');
+    $product = Product::destroy($product_id);
+    return redirect("manager")->withSuccess('You have signed-in');
+}
 }
