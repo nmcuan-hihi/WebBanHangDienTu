@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,9 @@ Route::post('cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('cart', [CartController::class, 'tocart'])->name('add.cart');
 Route::post('removecart', [CartController::class, 'removetocart'])->name('remove.cart');
 
+
+// comment
+Route::get('comment', [CommentController::class, 'toviewcomment'])->name('view.comment');
 
 Route::get('/', function () {
     return view('auth.login');

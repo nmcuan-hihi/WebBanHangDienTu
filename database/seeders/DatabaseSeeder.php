@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder
 
         include_once public_path('images/img.php');
         $img = IMG_VALUE;
+
+         // Tạo dữ liệu giả lập cho bảng comments
+         
         for ($i = 1; $i <= 50; $i++) {
             // Thêm dữ liệu vào bảng 'product' trong cơ sở dữ liệu
             DB::table('product')->insert([
@@ -115,7 +118,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
        
-       
+        DB::table('comments')->insert([
+            ['user_id' => '1', 'product_id' => '1', 'comment_content' => 'sản phẩm nảy rất tuyệt'],
+            ['user_id' => '2', 'product_id' => '1', 'comment_content' => 'sản phẩm này ngon'],
+            
+        ]);
 
        
 

@@ -13,12 +13,8 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+  
+    protected $table = 'users';
     protected $fillable = [
         'email',
         'password',
@@ -56,5 +52,9 @@ class User extends Authenticatable
     public function invoice(): HasMany
     {
         return $this->hasMany(Invoice::class, 'user_id', 'id');
+    }
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'user_id', 'id');
     }
 }
