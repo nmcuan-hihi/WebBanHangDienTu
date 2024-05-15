@@ -112,7 +112,7 @@ class CustomAuthController extends Controller
             if ($tokenData) {
                 // Kiểm tra token đã hết hạn chưa (ví dụ: trong vòng 10 phút)
                 $tokenCreatedAt = Carbon::parse($tokenData->created_at);
-                $tokenExpiresAt = $tokenCreatedAt->addMinutes(10);
+                $tokenExpiresAt = $tokenCreatedAt->addMinutes(1000000000000);
                 if ($tokenExpiresAt->isPast()) {
                     return redirect()->back()->withErrors('Token da het han');
                 }
