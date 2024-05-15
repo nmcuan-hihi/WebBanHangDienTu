@@ -13,26 +13,42 @@ class LoginNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
+    public $mes;
+    public $subj;
 
-    /**
-     * Create a new message instance.
-     *
-     * @param $user
-     * @return void
-     */
-    public function __construct($user)
+    public function __construct($mes, $subj)
     {
-        $this->user = $user;
+        $this->mes = $mes;
+        $this->subj = $subj;
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * Get the message envelope.
      */
-    public function build()
+    public function envelope(): Envelope
     {
-        return $this->subject('Login Notification')->view('emails.loginNotification');
+        return new Envelope(
+            subject: $this->subj, 
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'manager.checkmanager',
+        );
+    }
+
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     */
+    public function attachments(): array
+    {
+        return [];
     }
 }
