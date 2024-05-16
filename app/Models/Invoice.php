@@ -12,7 +12,7 @@ class Invoice extends Model
     use HasFactory;
     protected $primaryKey = 'invoice_id';
     public $incrementing = true;
-
+    protected $table = 'invoice';
     protected $fillable = [
         'user_id',
         'total_amount',

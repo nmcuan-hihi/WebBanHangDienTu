@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Product extends Model
 {
     use HasFactory;
+    protected $table = 'product';
     protected $primaryKey = 'product_id';
     public $incrementing = true;
 
@@ -20,14 +21,24 @@ class Product extends Model
         'product_image',
         'product_price',
         'warranty_period',
-        'product_quantity'   
+        'product_quantity'
     ];
-    public function category() : BelongsTo 
+
+    /**
+     * Relationship
+     * @return BelongsTo
+     */
+    public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id', 'category_id');
     }
-    public function manufacturer() : BelongsTo 
+
+    /**
+     * Relationship
+     * @return BelongsTo
+     */
+    public function manufacturer(): BelongsTo
     {
-        return $this->belongsTo(Manufacturer::class);
+        return $this->belongsTo(Manufacturer::class, 'manufacturer_id', 'manufacturer_id');
     }
 }
