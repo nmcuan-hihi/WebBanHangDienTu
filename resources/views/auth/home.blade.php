@@ -90,27 +90,43 @@
 <div class="clearfix"></div>
 
 <div class="d-flex justify-content-center mt-4">
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            @if ($products->onFirstPage())
-                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
-            @else
-                <li class="page-item"><a href="{{ $products->previousPageUrl() }}" class="page-link">&laquo;</a></li>
-            @endif
+    @if ($products->hasPages())
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {{-- Previous Page Link --}}
+                @if ($products->onFirstPage())
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo;</span>
+                    </li>
+                @else
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $products->previousPageUrl() }}" rel="prev">&laquo;</a>
+                    </li>
+                @endif
 
-            @for ($i = 1; $i <= $products->lastPage(); $i++)
-                <li class="page-item {{ $products->currentPage() == $i ? 'active' : '' }}"><a
-                        href="{{ $products->url($i) }}" class="page-link">{{ $i }}</a></li>
-            @endfor
+                {{-- Pagination Elements --}}
+                @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                    <li class="page-item {{ $products->currentPage() == $page ? 'active' : '' }}">
+                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                    </li>
+                @endforeach
 
-            @if ($products->hasMorePages())
-                <li class="page-item"><a href="{{ $products->nextPageUrl() }}" class="page-link">&raquo;</a></li>
-            @else
-                <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
-            @endif
-        </ul>
-    </nav>
+                {{-- Next Page Link --}}
+                @if ($products->hasMorePages())
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $products->nextPageUrl() }}" rel="next">&raquo;</a>
+                    </li>
+                @else
+                    <li class="page-item disabled">
+                        <span class="page-link">&raquo;</span>
+                    </li>
+                @endif
+            </ul>
+        </nav>
+    @endif
 </div>
+
+
 
 
 @endsection

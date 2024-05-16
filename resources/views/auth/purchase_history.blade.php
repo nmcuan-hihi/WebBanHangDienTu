@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <h1>Purchase History</h1>
     @if ($invoices->isEmpty())
         <p>No purchase history found.</p>

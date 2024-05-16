@@ -13,6 +13,9 @@ use App\Http\Controllers\ForgotController;
 
 use App\Http\Controllers\ManufacturersController;
 
+use App\Http\Controllers\InvoiceController;
+
+//Route::post('/send-invoice', [InvoiceController::class, 'sendInvoice'])->name('send.invoice');
 
 Route::get('addmanufacturers', [ManufacturersController::class, 'showAddForm'])->name('add.manufacturer');
 Route::post('addmanufacturers', [ManufacturersController::class, 'store'])->name('store.manufacturer');
@@ -62,7 +65,7 @@ Route::post('cart/updateQuantity', [CartController::class, 'updateQuantity'])->n
 Route::post('cart/remove', [CartController::class, 'removeItem'])->name('cart.remove');
 Route::post('/cart/purchase', [CartController::class, 'purchase'])->name('cart.purchase');
 Route::get('/purchase-history', [CartController::class, 'purchaseHistory'])->name('purchase.history');
-Route::post('/send-invoice', [CartController::class, 'sendInvoiceEmail'])->name('send.invoice');
+
 Route::post('/finalize-purchase', [CartController::class, 'finalizePurchase'])->name('finalize.purchase');
 Route::get('/invoice/{id}', [CartController::class, 'viewInvoice'])->name('invoice.detail');
 

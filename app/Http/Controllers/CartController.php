@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Product;
@@ -25,47 +26,69 @@ class CartController extends Controller
 
 
     public function finalizePurchase(Request $request)
-    {
-        $user_id = Auth::user()->id;
+{
+    $user_id = Auth::user()->id;
 
-        // Get data from the request
-        $cart = json_decode($request->input('cart'), true);
-        $subtotal = $request->input('subtotal');
-        $tax = $request->input('tax');
-        $total = $request->input('total');
-        $invoice_number = $request->input('invoice_number');
-        $customer_name = $request->input('customer_name');
-        $customer_address = $request->input('customer_address');
-        $customer_email = $request->input('customer_email');
-        $payment_method = $request->input('payment_method');
+    // Get data from the request
+    $cart = json_decode($request->input('cart'), true);
+    $subtotal = $request->input('subtotal');
+    $tax = $request->input('tax');
+    $total = $request->input('total');
+    $invoice_number = $request->input('invoice_number');
+    $customer_name = $request->input('customer_name');
+    $customer_address = $request->input('customer_address');
+    $customer_email = $request->input('customer_email');
+    $payment_method = $request->input('payment_method');
 
-        // Create a new invoice record
-        $invoice = Invoice::create([
-            'user_id' => $user_id,
-            'total_amount' => $total,
-            'invoice_payment' => '1', // Or other payment method
+    // Create a new invoice record
+    $invoice = Invoice::create([
+        'user_id' => $user_id,
+        'total_amount' => $total,
+        'invoice_payment' => '1', // Or other payment method
+    ]);
+
+    // Save invoice details
+    foreach ($cart as $item) {
+        InvoiceDetail::create([
+            'invoice_id' => $invoice->invoice_id, // Change to invoice_id
+            'product_id' => $item['id'],
+            'invoice_details_quantity' => $item['quantity'],
+            'price' => $item['price'],
         ]);
-
-        // Save invoice details
-        foreach ($cart as $item) {
-            InvoiceDetail::create([
-                'invoice_id' => $invoice->invoice_id, // Change to invoice_id
-                'product_id' => $item['id'],
-                'invoice_details_quantity' => $item['quantity'],
-                'price' => $item['price'],
-            ]);
-        }
-
-        // Clear the cart
-        //session()->forget('cart');
-
-        // Redirect to the purchase history page
-        $invoices = Invoice::where('user_id', auth()->id())->orderByDesc('created_at')->get();
-
-        // Chuyển dữ liệu đến view
-        return view('auth.purchase_history', compact('invoices'));
     }
 
+    // Clear the cart
+    session()->forget('cart');
+
+    // Redirect to the purchase history page
+    $invoices = Invoice::where('user_id', auth()->id())->orderByDesc('created_at')->get();
+
+    // Check if customer email is provided
+    if ($customer_email) {
+        $request->validate([
+            'customer_email' => 'email',
+        ]);
+
+        $invoiceData = [
+            'invoice_number' => $invoice_number,
+            'customer_name' => $customer_name,
+            'customer_address' => $customer_address,
+            'customer_email' => $customer_email,
+            'cart' => $cart,
+            'subtotal' => $subtotal,
+            'tax' => $tax,
+            'total' => $total
+        ];
+
+        Mail::to($customer_email)->send(new InvoiceMail($invoiceData));
+
+       
+    }
+
+    return view('auth.purchase_history', compact('invoices'))->with('success', 'Invoice sent to ' . $customer_email);
+}
+
+    
     public function viewInvoice($id)
     {
         // Lấy thông tin hóa đơn
@@ -96,35 +119,50 @@ class CartController extends Controller
     }
 
     public function purchase(Request $request)
-    {
-        $cart = session('cart', []);
-        if (empty($cart)) {
-            return redirect()->back()->with('error', 'Your cart is empty.');
-        }
-
-        // Calculate subtotal
-        $subtotal = array_reduce($cart, function ($carry, $item) {
-            return $carry + ($item['price'] * $item['quantity']);
-        }, 0);
-
-        // Calculate tax (assuming a 10% tax rate)
-        $tax = $subtotal * 0.10;
-
-        // Calculate total
-        $total = $subtotal + $tax;
-
-        return view('auth.invoice', [
-            'cart' => $cart,
-            'subtotal' => $subtotal,
-            'tax' => $tax,
-            'total' => $total,
-            'invoice_number' => 'INV-' . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT),
-            'customer_name' => 'Van Duc',
-            'customer_address' => 'Thủ Đức, Tp.HCM',
-            'customer_email' => 'nhomz9@gmail.com',
-            'payment_method' => 'Thẻ tín dụng',
-        ]);
+{
+    $cart = session('cart', []);
+    if (empty($cart)) {
+        return redirect()->back()->with('error', 'Your cart is empty.');
     }
+
+    // Calculate subtotal
+    $subtotal = array_reduce($cart, function ($carry, $item) {
+        return $carry + ($item['price'] * $item['quantity']);
+    }, 0);
+
+    // Calculate tax (assuming a 10% tax rate)
+    $tax = $subtotal * 0.10;
+
+    // Calculate total
+    $total = $subtotal + $tax;
+
+    // Get user profile data
+    $userProfile = UserProfile::where('user_id', auth()->id())->first();
+
+    // Check if user profile exists
+    if ($userProfile) {
+        $customerName = $userProfile->name;
+        $customerAddress = $userProfile->address;
+        $customerEmail = $userProfile->user->email;
+    } else {
+        // Fallback values
+        $customerName = 'Null';
+        $customerAddress = 'Null';
+        $customerEmail = 'Null';
+    }
+
+    return view('auth.invoice', [
+        'cart' => $cart,
+        'subtotal' => $subtotal,
+        'tax' => $tax,
+        'total' => $total,
+        'invoice_number' => 'INV-' . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT),
+        'customer_name' => $customerName,
+        'customer_address' => $customerAddress,
+        'customer_email' => $customerEmail,
+        'payment_method' => 'Thẻ tín dụng',
+    ]);
+}
 
     public function sendInvoiceEmail(Request $request)
     {

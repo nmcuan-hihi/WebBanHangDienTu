@@ -65,31 +65,35 @@
         </tfoot>
     </table>
     <div class="row mt-4">
-        <div class="col-md-12 text-md-right">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Phương Thức Thanh Toán</h5>
-                    <p class="card-text">{{ $payment_method ?? 'Thẻ Tín Dụng' }}</p>
+        <div class="col-md-6 text-md-left">
+            <form action="{{ route('finalize.purchase') }}" method="POST">
+                @csrf
+                <input type="hidden" name="cart" value="{{ json_encode($cart) }}">
+                <input type="hidden" name="subtotal" value="{{ $subtotal }}">
+                <input type="hidden" name="tax" value="{{ $tax }}">
+                <input type="hidden" name="total" value="{{ $total }}">
+                <input type="hidden" name="invoice_number" value="{{ $invoice_number }}">
+                <input type="hidden" name="customer_name" value="{{ $customer_name }}">
+                <input type="hidden" name="customer_address" value="{{ $customer_address }}">
+                <input type="hidden" name="payment_method" value="{{ $payment_method }}">
+
+                <input type="hidden" name="cart" value="{{ json_encode($cart) }}">
+                <input type="hidden" name="subtotal" value="{{ $subtotal }}">
+                <input type="hidden" name="tax" value="{{ $tax }}">
+                <input type="hidden" name="total" value="{{ $total }}">
+                <input type="hidden" name="invoice_number" value="{{ $invoice_number }}">
+                <input type="hidden" name="customer_name" value="{{ $customer_name }}">
+                <input type="hidden" name="customer_address" value="{{ $customer_address }}">
+                <input type="hidden" name="payment_method" value="{{ $payment_method }}">
+                <div class="form-group">
+                    <label for="customer_email">Nhập email để nhận hóa đơn:</label>
+                    <input type="email" class="form-control" name="customer_email" id="customer_email">
                 </div>
-            </div>
+
+                <button type="submit" class="btn btn-success">Mua hàng </button>
+            </form>
         </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col-md-12 text-md-right">
-        <form action="{{ route('finalize.purchase') }}" method="POST">
-            @csrf
-            <input type="hidden" name="cart" value="{{ json_encode($cart) }}">
-            <input type="hidden" name="subtotal" value="{{ $subtotal }}">
-            <input type="hidden" name="tax" value="{{ $tax }}">
-            <input type="hidden" name="total" value="{{ $total }}">
-            <input type="hidden" name="invoice_number" value="{{ $invoice_number }}">
-            <input type="hidden" name="customer_name" value="{{ $customer_name }}">
-            <input type="hidden" name="customer_address" value="{{ $customer_address }}">
-            <input type="hidden" name="customer_email" value="{{ $customer_email }}">
-            <input type="hidden" name="payment_method" value="{{ $payment_method }}">
-            <button type="submit" class="btn btn-success">Mua hàng</button>
-        </form>
-        </div>
+
     </div>
 </div>
 @endsection

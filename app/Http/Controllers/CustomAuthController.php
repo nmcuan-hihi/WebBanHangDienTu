@@ -137,22 +137,31 @@ class CustomAuthController extends Controller
             return redirect()->route('login')->withErrors('Login FAIL');
         }
     }
+   
     public function gohome(Request $request)
-    {
-        // Kiểm tra xem người dùng đã đăng nhập hay chưa
-        if (Auth::check()) {
-            // // Lấy danh sách người dùng phân trang
-            //  $product = Product::paginate(20); // Số lượng trên mỗi trang 
-            $products = Product::paginate(3);
-            return view('auth.home', compact('products'));
-            // Trả về view 'auth.home' với dữ liệu người dùng phân trang
-            // return view('auth.home', ['product' => $product]);
-            // return view('auth.home', ['users' => $users]);
-        }
+{
+    // Kiểm tra xem người dùng đã đăng nhập hay chưa
+    if (Auth::check()) {
+        // Lấy người dùng hiện tại
+        $user = Auth::user();
 
-        // Nếu người dùng chưa đăng nhập
-        return redirect("login")->withSuccess('You are not allowed to access');
+        // Kiểm tra vai trò của người dùng
+        if ($user->role === 'admin') {
+            // Nếu vai trò là admin, chuyển hướng đến trang quản lý
+            $products = Product::paginate(7);
+                $categories = Category::all();
+            return view('manager.managerhome', compact('products', 'categories'));;
+        } elseif ($user->role === 'custom') {
+            // Nếu vai trò là custom, trả về trang chủ với sản phẩm phân trang
+            $products = Product::paginate(6);
+            return view('auth.home', compact('products'));
+        }
     }
+
+    // Nếu người dùng chưa đăng nhập
+    return redirect("login")->withSuccess('You are not allowed to access');
+}
+
 
     public function gomanager(Request $request)
     {
