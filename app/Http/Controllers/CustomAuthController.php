@@ -95,27 +95,55 @@ class CustomAuthController extends Controller
         return redirect("login")->withSuccess('You are not allowed to access');
     }
 
-
-    //hien thi chi tiet thong tin user.
-    //hien thi chi tiet thong tin user
-    public function showinfouser(Request $request)
+    // chuyển sang trang sửa thông tin user
+    public function editUser(Request $request)
     {
         $user_id = $request->get('id');
         $user = User::find($user_id);
-        
-        return view('manager.itemuser', ['user' => $user]);
+        return view('manager.edituser', ['user' => $user]);
     }
-    //xoa user
-    
-    public function deleteUser(Request $request)
 
+    //sửa thông tin user 
+    public function cfeditUser(Request $request)
     {
-        $user_id = $request->get('id');
-        
-        // Tìm người dùng dựa trên ID
-        $user = User::find($user_id);
-        
-        return view('manager.itemuser', ['user' => $user]);
+        // Lấy thông tin từ request
+        $userId = $request->input('id');
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $phone = $request->input('phone');
+        $address = $request->input('address');
+        $sex = $request->input('sex');
+        $role = $request->input('role');
+        $password = $request->input('password');
+        $image = $request->file('image'); // Lấy file hình ảnh từ request
+
+        // Cập nhật thông tin người dùng
+        $user = User::findOrFail($userId);
+        $user->email = $email;
+        // Kiểm tra xem mật khẩu có được cập nhật không, nếu có thì mã hóa nó trước khi lưu vào cơ sở dữ liệu
+        if ($password) {
+            $user->password = bcrypt($password);
+        }
+        $user->save();
+
+        // Cập nhật thông tin hồ sơ người dùng
+        $userProfile = UserProfile::where('user_id', $userId)->firstOrFail();
+        $userProfile->name = $name;
+        $userProfile->phone = $phone;
+        $userProfile->address = $address;
+        $userProfile->sex = $sex;
+
+        // Kiểm tra xem có tệp hình ảnh mới được tải lên không
+        if ($image) {
+            // Đọc và mã hóa hình ảnh thành dữ liệu base64
+            $base64Image = base64_encode(file_get_contents($image));
+            // Cập nhật dữ liệu base64 vào hồ sơ người dùng
+            $userProfile->image = $base64Image;
+        }
+
+        $userProfile->save();
+
+        // Redirect hoặc trả về phản hồi
+        return redirect()->route('manageruser')->with('success', 'User information updated successfully.');
     }
-   
 }
