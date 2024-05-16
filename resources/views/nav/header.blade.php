@@ -46,6 +46,9 @@
         <ul class="navbar-nav ms-auto">
           @auth
           @if(Auth::user()->role == 'custom')
+          <li class="nav-item">
+            <a class="nav-link" href=" {{ route('purchase.history') }}">Lịch sử mua hàng</a>
+          </li>
           <li class="nav-item text-light">
             <p class="pt-2">{{Auth::user()->email}}</p>
           </li>

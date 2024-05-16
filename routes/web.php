@@ -77,6 +77,7 @@ Route::post('cart/updateQuantity', [CartController::class, 'updateQuantity'])->n
 Route::post('cart/remove', [CartController::class, 'removeItem'])->name('cart.remove');
 Route::post('/cart/purchase', [CartController::class, 'purchase'])->name('cart.purchase');
 Route::get('/purchase-history', [CartController::class, 'purchaseHistory'])->name('purchase.history');
+Route::delete('/invoice/{id}', [CartController::class, 'destroy'])->name('invoice.destroy');
 
 Route::post('/finalize-purchase', [CartController::class, 'finalizePurchase'])->name('finalize.purchase');
 Route::get('/invoice/{id}', [CartController::class, 'viewInvoice'])->name('invoice.detail');

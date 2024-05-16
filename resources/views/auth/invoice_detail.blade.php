@@ -9,12 +9,10 @@
         <p><strong>Date:</strong> {{ $invoice->created_at->format('Y-m-d') }}</p>
 
         <h2>Customer Information</h2>
-        @if ($userProfile)
-            <p><strong>Name:</strong> {{ $userProfile->name }}</p>
-            <p><strong>Phone:</strong> {{ $userProfile->phone }}</p>
-        @else
-            <p><strong>Customer profile not found.</strong></p>
-        @endif
+   
+            <p><strong>Name:</strong> {{ Auth::user()->userProfile->name }}</p>
+            <p><strong>Phone:</strong> {{ Auth::user()->userProfile->phone }}</p>
+     
 
         <h2>Products</h2>
         <table class="table">

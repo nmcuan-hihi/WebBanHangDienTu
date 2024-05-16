@@ -23,7 +23,19 @@ class CartController extends Controller
         // Nếu người dùng chưa đăng nhập
         return redirect("login")->withSuccess('You are not allowed to access');
     }
+    public function destroy($id)
+    {
+        $invoice = Invoice::findOrFail($id);
 
+        // Kiểm tra quyền xóa hóa đơn
+        if ($invoice->user_id == Auth::id()) {
+            $invoice->delete();
+
+            return redirect()->route('purchase.history')->with('success', 'Invoice deleted successfully.');
+        } else {
+            return redirect()->route('purchase.history')->with('error', 'You are not authorized to delete this invoice.');
+        }
+    }
 
     public function finalizePurchase(Request $request)
 {
