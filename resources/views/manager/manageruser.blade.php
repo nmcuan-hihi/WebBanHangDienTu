@@ -23,22 +23,29 @@
         <tbody>
             @foreach($users as $user)
             <tr>
-                <td><img src="data:image;base64,{{ $user->userProfile->image }}" alt="image" style="width: 50px; height: 50px;" /></td>
-                <td>{{ $user->userProfile->name }}</td>
+                <td>
+                    @if ($user->userProfile)
+                    <img src="data:image;base64,{{ $user->userProfile->image }}" alt="image" style="width: 50px; height: 50px;" />
+                    @else
+                    <!-- Hiển thị hình ảnh mặc định nếu không có userProfile -->
+                 
+                    @endif
+                </td>
+                <td>{{ $user->userProfile ? $user->userProfile->name : '' }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->userProfile->phone }}</td>
-                <td>{{ $user->userProfile->address }}</td>
-                <td>{{ $user->userProfile->sex }}</td>
+                <td>{{ $user->userProfile ? $user->userProfile->phone : '' }}</td>
+                <td>{{ $user->userProfile ? $user->userProfile->address : '' }}</td>
+                <td>{{ $user->userProfile ? $user->userProfile->sex : '' }}</td>
                 <td>{{ $user->role }}</td>
                 <td>
-                <a href="{{ route('user.showitem', ['id' => $user->id]) }}" class="btn btn-warning btn-sm">
-                <span class="material-icons">visibility</span> Chi tiết
-                    <a href="{{ route('user.edit', ['id' => $user->id]) }}" class="btn btn-warning btn-sm">
-                        <span class="material-icons">edit</span> Sửa
-                   
-                    <a href="{{ route('user.delete', ['id' => $user->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chăc muốn xóa?')">
-                        <span class="material-icons">delete</span> Xóa
-                    </a>
+                    <a href="{{ route('user.showitem', ['id' => $user->id]) }}" class="btn btn-warning btn-sm">
+                        <span class="material-icons">visibility</span> Chi tiết
+                        <a href="{{ route('user.edit', ['id' => $user->id]) }}" class="btn btn-warning btn-sm">
+                            <span class="material-icons">edit</span> Sửa
+
+                            <a href="{{ route('user.delete', ['id' => $user->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chăc muốn xóa?')">
+                                <span class="material-icons">delete</span> Xóa
+                            </a>
                 </td>
             </tr>
             @endforeach
