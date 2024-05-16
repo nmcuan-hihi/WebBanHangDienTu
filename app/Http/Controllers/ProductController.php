@@ -29,9 +29,9 @@ class ProductController extends Controller
 
         // Kiểm tra nếu không có yêu cầu lọc hoặc sắp xếp
         if (!$request->has('category') && !$request->has('sort')) {
-            $products = Product::paginate(3);
+            $products = Product::paginate(6);
         } else {
-            $products = $query->paginate(3);
+            $products = $query->paginate(6);
         }
 
         $categories = Category::all();
@@ -104,7 +104,7 @@ class ProductController extends Controller
 
         // Tìm kiếm sản phẩm trong cơ sở dữ liệu với từ khóa $searchTerm
         $products = Product::where('product_name', 'like', '%' . $searchTerm . '%')
-                           ->paginate(10);
+                           ->paginate(6);
         $categories = Category::all();
         return view('auth.home', compact('products','categories'));
     }

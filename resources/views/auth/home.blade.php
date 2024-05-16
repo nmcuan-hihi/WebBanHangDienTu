@@ -105,11 +105,19 @@
                 @endif
 
                 {{-- Pagination Elements --}}
-                @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
-                    <li class="page-item {{ $products->currentPage() == $page ? 'active' : '' }}">
-                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                @php
+                    // Maximum number of pages to display
+                    $maxPages = 5;
+                    // Calculate start and end page numbers
+                    $startPage = max($products->currentPage() - floor($maxPages / 2), 1);
+                    $endPage = min($startPage + $maxPages - 1, $products->lastPage());
+                @endphp
+
+                @for ($i = $startPage; $i <= $endPage; $i++)
+                    <li class="page-item {{ $products->currentPage() == $i ? 'active' : '' }}">
+                        <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
                     </li>
-                @endforeach
+                @endfor
 
                 {{-- Next Page Link --}}
                 @if ($products->hasMorePages())
@@ -125,6 +133,7 @@
         </nav>
     @endif
 </div>
+
 
 
 
