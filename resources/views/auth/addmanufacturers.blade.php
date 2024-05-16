@@ -4,6 +4,17 @@
 
 <body>
     <div class="container">
+        <!-- Biểu mẫu tìm kiếm -->
+        <form action="{{ route('manufacturer.search') }}" method="GET" id="searchForm" class="mb-3">
+            @csrf
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search by manufacturer name..." id="manufacturer_name" name="manufacturer_name">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+
         <h1>Add Manufacturer</h1>
         <form action="{{ route('store.manufacturer') }}" method="POST">
             @csrf
@@ -31,7 +42,6 @@
         @if(Session::has('success'))
             <div class="alert alert-success">{{ Session::get('success') }}</div>
         @endif
-
         <h2>List of Manufacturers</h2>
         <div class="table-responsive">
             <table class="table">

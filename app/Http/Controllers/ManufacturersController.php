@@ -35,6 +35,18 @@ class ManufacturersController extends Controller
         // Chuyển hướng người dùng đến trang hiển thị nhà sản xuất với thông báo
         return redirect()->route('add.manufacturer', $id)->with('success', 'Manufacturer updated successfully.');
     }
+    public function search(Request $request)
+{
+    // Lấy tên nhà cung cấp từ yêu cầu
+    $manufacturer_name = $request->input('manufacturer_name');
+
+    // Tìm kiếm nhà cung cấp dựa trên tên
+    $manufacturers = Manufacturer::where('manufacturer_name', 'LIKE', "%$manufacturer_name%")->get();
+
+    // Trả về view với kết quả tìm kiếm
+    return view('auth.addmanufacturers', ['manufacturers' => $manufacturers]);
+}
+
 
     // Phương thức hiển thị form thêm mới nhà sản xuất
     public function showAddForm()
