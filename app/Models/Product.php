@@ -22,10 +22,10 @@ class Product extends Model
         'warranty_period',
         'product_quantity'   
     ];
-    public function category() : BelongsTo 
-    {
-        return $this->belongsTo(Category::class);
-    }
+    public function categories()
+{
+    return $this->belongsToMany(Category::class, 'category_product');
+}
     public function manufacturer() : BelongsTo 
     {
         return $this->belongsTo(Manufacturer::class);

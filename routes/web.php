@@ -10,7 +10,12 @@ Route::get('home', [CustomAuthController::class, 'gohome'])->name('home');
 Route::get('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
 Route::get('addcategory', [CustomAuthController::class, 'toAddCategory'])->name('addcategory');
 Route::post('addcategory', [CustomAuthController::class, 'addCategory'])->name('category.add');
+Route::get('editcategory/{id}', [CustomAuthController::class, 'toEditCategory'])->name('category.edit');
+Route::post('editcategory/{id}', [CustomAuthController::class, 'editCategory'])->name('category.edit.post');
 
+
+//Route::delete('categories/{id}', [CustomAuthController::class, 'deleteCategory'])->name('category.delete');
+Route::get('deleteCategory',[CustomAuthController::class],'deleteCategorys')->name('deleteCategory');
 Route::get('/', function () {
     return view('auth.login');
 });
