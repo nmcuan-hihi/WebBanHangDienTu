@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Product extends Model
 {
     use HasFactory;
+
+    protected $table = 'product'; // Đặt tên bảng là 'product' thay vì 'products'
     protected $primaryKey = 'product_id';
     public $incrementing = true;
 
@@ -22,12 +24,15 @@ class Product extends Model
         'warranty_period',
         'product_quantity'   
     ];
+    
     public function category() : BelongsTo 
     {
         return $this->belongsTo(Category::class);
     }
+    
     public function manufacturer() : BelongsTo 
     {
         return $this->belongsTo(Manufacturer::class);
     }
 }
+
