@@ -11,18 +11,17 @@ class InvoiceMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $invoiceData;
+    public $data;
 
-    public function __construct($invoiceData)
+    public function __construct($data)
     {
-        $this->invoiceData = $invoiceData;
+        $this->data = $data;
     }
 
     public function build()
     {
         return $this->view('emails.invoice')
-                    ->subject('Hóa đơn của bạn')
-                    ->with(['invoiceData' => $this->invoiceData]);
+                    ->with('data', $this->data);
     }
 }
 

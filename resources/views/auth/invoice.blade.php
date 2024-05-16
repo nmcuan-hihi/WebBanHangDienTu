@@ -4,27 +4,27 @@
 <div class="container mt-5">
     <div class="row mb-4">
         <div class="col-12 text-center">
-            <h1 class="display-4">Invoice</h1>
+            <h1 class="display-4">Hóa Đơn</h1>
         </div>
     </div>
     <div class="row mb-4">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Invoice Details</h5>
-                    <p class="card-text"><strong>Invoice #:</strong> {{ $invoice_number ?? '0001' }}</p>
-                    <p class="card-text"><strong>Date:</strong> {{ date('Y-m-d') }}</p>
+                    <h5 class="card-title">Chi Tiết Hóa Đơn</h5>
+                    <p class="card-text"><strong>Số Hóa Đơn:</strong> {{ $invoice_number ?? '0001' }}</p>
+                    <p class="card-text"><strong>Ngày:</strong> {{ date('Y-m-d') }}</p>
                 </div>
             </div>
         </div>
         <div class="col-md-6 text-md-right">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Billing Details</h5>
+                    <h5 class="card-title">Chi Tiết Thanh Toán</h5>
                     <p class="card-text">
-                        {{ $customer_name ?? 'John Doe' }}<br>
-                        {{ $customer_address ?? '1234 Main St, Anytown, USA' }}<br>
-                        {{ $customer_email ?? 'john.doe@example.com' }}
+                        {{ $customer_name ?? 'Van Duc' }}<br>
+                        {{ $customer_address ?? 'Thủ Đức, Tp.HCM' }}<br>
+                        {{ $customer_email ?? 'nhomz9@gmail.com' }}
                     </p>
                 </div>
             </div>
@@ -33,10 +33,10 @@
     <table class="table table-hover table-bordered">
         <thead class="thead-dark">
             <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
+                <th>Tên</th>
+                <th>Giá</th>
+                <th>Số Lượng</th>
+                <th>Tổng</th>
             </tr>
         </thead>
         <tbody>
@@ -51,15 +51,15 @@
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="3" class="text-right">Subtotal</th>
+                <th colspan="3" class="text-right">Tổng Cộng</th>
                 <th>${{ number_format($subtotal, 2) }}</th>
             </tr>
             <tr>
-                <th colspan="3" class="text-right">Tax (10%)</th>
+                <th colspan="3" class="text-right">Thuế (10%)</th>
                 <th>${{ number_format($tax, 2) }}</th>
             </tr>
             <tr>
-                <th colspan="3" class="text-right">Grand Total</th>
+                <th colspan="3" class="text-right">Tổng Thanh Toán</th>
                 <th>${{ number_format($total, 2) }}</th>
             </tr>
         </tfoot>
@@ -68,61 +68,28 @@
         <div class="col-md-12 text-md-right">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Payment Method</h5>
-                    <p class="card-text">{{ $payment_method ?? 'Credit Card' }}</p>
+                    <h5 class="card-title">Phương Thức Thanh Toán</h5>
+                    <p class="card-text">{{ $payment_method ?? 'Thẻ Tín Dụng' }}</p>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <form id="sendInvoiceForm">
-                @csrf
-                <div class="form-group">
-                    <label for="email">Nhập email của bạn:</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Gửi</button>
-            </form>
+    <div class="row mt-4">
+        <div class="col-md-12 text-md-right">
+        <form action="{{ route('finalize.purchase') }}" method="POST">
+            @csrf
+            <input type="hidden" name="cart" value="{{ json_encode($cart) }}">
+            <input type="hidden" name="subtotal" value="{{ $subtotal }}">
+            <input type="hidden" name="tax" value="{{ $tax }}">
+            <input type="hidden" name="total" value="{{ $total }}">
+            <input type="hidden" name="invoice_number" value="{{ $invoice_number }}">
+            <input type="hidden" name="customer_name" value="{{ $customer_name }}">
+            <input type="hidden" name="customer_address" value="{{ $customer_address }}">
+            <input type="hidden" name="customer_email" value="{{ $customer_email }}">
+            <input type="hidden" name="payment_method" value="{{ $payment_method }}">
+            <button type="submit" class="btn btn-success">Mua hàng</button>
+        </form>
         </div>
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#sendInvoiceForm').on('submit', function(event) {
-        event.preventDefault();
-        
-        var formData = {
-            _token: $('input[name="_token"]').val(),
-            email: $('#email').val(),
-            invoice_number: '{{ $invoice_number ?? '0001' }}',
-            date: '{{ date('Y-m-d') }}',
-            customer_name: '{{ $customer_name ?? 'John Doe' }}',
-            customer_address: '{{ $customer_address ?? '1234 Main St, Anytown, USA' }}',
-            customer_email: '{{ $customer_email ?? 'john.doe@example.com' }}',
-            cart: @json($cart),
-            subtotal: {{ $subtotal }},
-            tax: {{ $tax }},
-            total: {{ $total }},
-            payment_method: '{{ $payment_method ?? 'Credit Card' }}'
-        };
-
-        $.ajax({
-            url: '{{ route('send.invoice') }}',
-            method: 'POST',
-            data: formData,
-            success: function(response) {
-                alert('Hóa đơn đã được gửi qua email!');
-            },
-            error: function(xhr, status, error) {
-                alert('Đã xảy ra lỗi khi gửi hóa đơn. Vui lòng thử lại.');
-            }
-        });
-    });
-});
-</script>
 @endsection

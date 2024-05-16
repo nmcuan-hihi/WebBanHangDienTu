@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ManufacturersController;
@@ -28,10 +27,9 @@ Route::post('cart/remove', [CartController::class, 'removeItem'])->name('cart.re
 Route::post('/cart/purchase', [CartController::class, 'purchase'])->name('cart.purchase');
 Route::get('/purchase-history', [CartController::class, 'purchaseHistory'])->name('purchase.history');
 Route::post('/send-invoice', [CartController::class, 'sendInvoiceEmail'])->name('send.invoice');
+Route::post('/finalize-purchase', [CartController::class, 'finalizePurchase'])->name('finalize.purchase');
 Route::get('/invoice/{id}', [CartController::class, 'viewInvoice'])->name('invoice.detail');
-
 
 Route::get('/', function () {
     return redirect()->route('login');
 });
-

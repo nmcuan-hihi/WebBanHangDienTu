@@ -9,9 +9,12 @@
         <p><strong>Date:</strong> {{ $invoice->created_at->format('Y-m-d') }}</p>
 
         <h2>Customer Information</h2>
-        <p><strong>Name:</strong> {{ $invoice->user->user_id }}</p>
-        <p><strong>Email:</strong> {{ $invoice->user->email }}</p>
-       
+        @if ($userProfile)
+            <p><strong>Name:</strong> {{ $userProfile->name }}</p>
+            <p><strong>Phone:</strong> {{ $userProfile->phone }}</p>
+        @else
+            <p><strong>Customer profile not found.</strong></p>
+        @endif
 
         <h2>Products</h2>
         <table class="table">
@@ -26,8 +29,8 @@
             <tbody>
             @foreach ($invoiceDetails as $detail)
                 <tr>
-                    <td>{{ $detail->product_name }}</td>
-                    <td>{{ $detail->product_price }}</td>
+                    <td>{{ $detail->product ? $detail->product->product_name : 'Product not available' }}</td>
+                    <td>{{ $detail->product ? $detail->product->product_price : 'N/A' }}</td>
                     <td>{{ $detail->quantity }}</td>
                     <td>{{ $detail->price * $detail->quantity }}</td>
                 </tr>
