@@ -105,5 +105,16 @@ class CustomAuthController extends Controller
         
         return view('manager.itemuser', ['user' => $user]);
     }
-   
+     //xoa user
+    
+    public function deleteUser(Request $request)
+
+    {
+        $user_id = $request->get('id');
+        
+        // Tìm người dùng dựa trên ID
+        $user = User::find($user_id);
+        
+        return view('manager.itemuser', ['user' => $user]);
+    }
 }
