@@ -48,7 +48,7 @@
                  <a href="{{ route('product.edit', ['id' => $product->product_id]) }}" class="btn btn-warning btn-sm">
                         <span class="material-icons">edit</span> Sửa
                     </a>
-                    <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chăc muốn xóa?')">
+                    <a href="{{ route('deleteProduct', ['id' => $product->product_id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chăc muốn xóa?')">
                         <span class="material-icons">delete</span> Xóa
                     </a>
             </td>

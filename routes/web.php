@@ -40,6 +40,8 @@ Route::get('filter-products', [ProductController::class, 'index'])->name('filter
 //Route::get('home', [ProductController::class, 'index'])->name('filterProducts');
 Route::get('product', [ProductController::class, 'toproductedit'])->name('product.edit');
 Route::post('product', [ProductController::class, 'productedit'])->name('conflim.edit.product');
+// delete product
+Route::get('deleteProduct',[ProductController:: class, 'delete'])->name('deleteProduct');
 
 // cart
 Route::post('cart', [CartController::class, 'addToCart'])->name('cart');
