@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+<<<<<<< HEAD
 use App\Mail\LoginNotification;
 use App\Models\Category;
 use App\Models\Product;
@@ -10,6 +11,8 @@ use App\Models\User;
 use App\Models\UserProfile;
 
 use Carbon\Carbon;
+=======
+>>>>>>> origin/26-Thu-Danh_Sach_User
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -37,6 +40,7 @@ class CustomAuthController extends Controller
         return Redirect('login');
     }
 
+<<<<<<< HEAD
     public function toRegister()
     {
         return view('auth.register');
@@ -85,6 +89,8 @@ class CustomAuthController extends Controller
 }
   
 
+=======
+>>>>>>> origin/26-Thu-Danh_Sach_User
 
     public function checkUser(Request $request)
     {
@@ -99,6 +105,7 @@ class CustomAuthController extends Controller
             $user = Auth::user();
 
             // Kiểm tra vai trò của người dùng
+<<<<<<< HEAD
             if ($user->role === 'admin') {
                 // Tạo token ngẫu nhiên
                 $token = Str::random(6);
@@ -123,6 +130,16 @@ class CustomAuthController extends Controller
                 return redirect()->intended('home')->withSuccess('Signed in');
             } else {
                 return redirect()->route('login')->withErrors('Login FAIL');
+=======
+            switch ($user->role) {
+                case 'admin':
+                    return redirect()->intended('manager')->withSuccess('Signed in with admin');
+                    break;
+                case 'custom':
+                    return redirect()->intended('home')->withSuccess('Signed in');
+                default:
+                    redirect("login")->withSuccess('Login FAIL'); // gọi router có tên login
+>>>>>>> origin/26-Thu-Danh_Sach_User
             }
         }
 
@@ -183,4 +200,5 @@ class CustomAuthController extends Controller
         // Nếu người dùng chưa đăng nhập
         return redirect("login")->withSuccess('You are not allowed to access');
     }
+
 }

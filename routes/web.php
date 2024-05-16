@@ -2,8 +2,13 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomAuthController;
+<<<<<<< HEAD
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ProductController;
+=======
+use App\Http\Controllers\UserController;
+
+>>>>>>> origin/26-Thu-Danh_Sach_User
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\CustomCssFile;
 
@@ -17,6 +22,7 @@ Route::post('login', [CustomAuthController::class, 'checkUser'])->name('user.che
 Route::get('signout', [CustomAuthController::class, 'signout'])->name('signout');
 
 Route::get('home', [CustomAuthController::class, 'gohome'])->name('home');
+<<<<<<< HEAD
 Route::post('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
 
 
@@ -36,6 +42,15 @@ Route::get('/pasword/reset/{token}', [ForgotController::class, 'resetPassword'])
 Route::post('/pasword/reset/', [ForgotController::class, 'resetPasswordPost'])->name('reset.password.post');
 
 
+=======
+Route::get('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
+
+Route::get('manageruser', [UserController::class, 'listuser'])->name('manageruser');
+Route::get('itemuser', [UserController::class, 'showinfouser'])->name('user.showitem');
+Route::get('edituser', [UserController::class, 'editUser'])->name('user.edit');
+Route::post('edituser', [UserController::class, 'cfeditUser'])->name('user.update');
+Route::get('deleteuser', [UserController::class, 'deleteUser'])->name('user.delete');
+>>>>>>> origin/26-Thu-Danh_Sach_User
 
 Route::get('/', function () {
     return view('auth.login');
