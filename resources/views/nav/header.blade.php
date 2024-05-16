@@ -24,10 +24,10 @@
         <ul class="navbar-nav me-auto">
           @guest
           <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href="{{ route('login') }}">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Sign up</a>
+          <a class="nav-link" href="{{ route('register') }}">Sign up</a>
           </li>
           @else
           <li class="nav-item">
@@ -58,6 +58,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('add.manufacturer') }}">Thêm nhà cung cấp</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('manageruser') }}">Quản Lý User</a>
+          </li>    
           <li class="nav-item">
             <span class="nav-link">Login to Admin: {{ Auth::user()->email }}</span>
           </li>

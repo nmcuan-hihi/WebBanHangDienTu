@@ -24,7 +24,8 @@ Route::put('/update/manufacturer/{manufacturer_id}', [ManufacturersController::c
 
 Route::get('login', [CustomAuthController::class, 'toLogin'])->name('login');
 Route::post('login', [CustomAuthController::class, 'checkUser'])->name('user.checkUser');
-
+Route::get('register', [CustomAuthController::class, 'toRegister'])->name('register');
+Route::post('register', [CustomAuthController::class, 'createUser'])->name('user.createUser');
 Route::get('signout', [CustomAuthController::class, 'signout'])->name('signout');
 
 Route::get('home', [CustomAuthController::class, 'gohome'])->name('home');
@@ -53,7 +54,6 @@ Route::get('edituser', [UserController::class, 'editUser'])->name('user.edit');
 Route::post('edituser', [UserController::class, 'cfeditUser'])->name('user.update');
 Route::get('deleteuser', [UserController::class, 'deleteUser'])->name('user.delete');
 Route::get('home', [ProductController::class, 'index'])->name('home');
-Route::get('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
 Route::get('addproduct', [ProductController::class, 'showAddForm'])->name('addproduct');
 Route::post('addproduct', [ProductController::class, 'store'])->name('store.product');
 Route::get('product/image/{id}', [ProductController::class, 'getProductImage'])->name('get.product.image');
