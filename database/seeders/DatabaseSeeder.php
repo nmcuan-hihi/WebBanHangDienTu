@@ -133,7 +133,27 @@ class DatabaseSeeder extends Seeder
         // ]);
 
        
-       
+        DB::table('comments')->insert([
+            ['user_id' => '1', 'product_id' => '1', 'comment_content' => 'sản phẩm nảy rất tuyệt'],
+            ['user_id' => '2', 'product_id' => '1', 'comment_content' => 'sản phẩm này ngon'],
+            ['user_id' => '1', 'product_id' => '1', 'comment_content' => 'sản phẩm nảy rất tuyệt'],
+            ['user_id' => '2', 'product_id' => '1', 'comment_content' => 'sản phẩm này ngon'],
+            ['user_id' => '1', 'product_id' => '1', 'comment_content' => 'sản phẩm nảy rất tuyệt'],
+            ['user_id' => '2', 'product_id' => '1', 'comment_content' => 'sản phẩm này ngon'],
+            ['user_id' => '1', 'product_id' => '1', 'comment_content' => 'sản phẩm nảy rất tuyệt'],
+            ['user_id' => '2', 'product_id' => '1', 'comment_content' => 'sản phẩm này ngon'],
+            ['user_id' => '1', 'product_id' => '1', 'comment_content' => 'sản phẩm nảy rất tuyệt'],
+            ['user_id' => '2', 'product_id' => '1', 'comment_content' => 'sản phẩm này ngon'],
+            ['user_id' => '1', 'product_id' => '1', 'comment_content' => 'sản phẩm nảy rất tuyệt'],
+            ['user_id' => '2', 'product_id' => '1', 'comment_content' => 'sản phẩm này ngon'],
+            ['user_id' => '1', 'product_id' => '1', 'comment_content' => 'sản phẩm nảy rất tuyệt'],
+            ['user_id' => '2', 'product_id' => '1', 'comment_content' => 'sản phẩm này ngon'],
+            ['user_id' => '1', 'product_id' => '1', 'comment_content' => 'sản phẩm nảy rất tuyệt'],
+            ['user_id' => '2', 'product_id' => '1', 'comment_content' => 'sản phẩm này ngon'],
+            ['user_id' => '1', 'product_id' => '1', 'comment_content' => 'sản phẩm nảy rất tuyệt'],
+            ['user_id' => '2', 'product_id' => '1', 'comment_content' => 'sản phẩm này ngon'],
+            
+        ]);
 
        
 

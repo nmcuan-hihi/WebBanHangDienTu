@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ProductController;
@@ -24,6 +25,12 @@ Route::post('product', [ProductController::class, 'productedit'])->name('conflim
 Route::post('cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('cart', [CartController::class, 'tocart'])->name('add.cart');
 Route::post('removecart', [CartController::class, 'removetocart'])->name('remove.cart');
+
+
+// comment
+Route::get('comment', [CommentController::class, 'toviewcomment'])->name('view.comment');
+Route::post('comment', [CommentController::class, 'sendcomment'])->name('send.comment');
+Route::post('removecomment', [CommentController::class, 'deletecomment'])->name('delete.comment');
 
 
 Route::get('/', function () {

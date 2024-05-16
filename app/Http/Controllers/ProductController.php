@@ -29,9 +29,9 @@ class ProductController extends Controller
 
         // Kiểm tra nếu không có yêu cầu lọc hoặc sắp xếp
         if (!$request->has('category') && !$request->has('sort')) {
-            $products = Product::paginate(3);
+            $products = Product::paginate(4);
         } else {
-            $products = $query->paginate(3);
+            $products = $query->paginate(4);
         }
 
         $categories = Category::all();

@@ -80,8 +80,8 @@ class CustomAuthController extends Controller
         // Kiểm tra xem người dùng đã đăng nhập hay chưa
         if (Auth::check()) {
             // // Lấy danh sách người dùng phân trang
-            //  $product = Product::paginate(20); // Số lượng trên mỗi trang 
-            $products = Product::paginate(3);
+          //  $product = Product::paginate(20); // Số lượng trên mỗi trang 
+            $products = Product::paginate(5);
             return view('auth.home', compact('products'));
             // Trả về view 'auth.home' với dữ liệu người dùng phân trang
             // return view('auth.home', ['product' => $product]);
