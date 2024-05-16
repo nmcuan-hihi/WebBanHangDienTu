@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CustomAuthController;
 
 use App\Http\Controllers\EmailController;
@@ -91,6 +92,13 @@ Route::post('addcategory', [CategoryController::class, 'addCategory'])->name('ca
 
 Route::get('/category/edit/{category}', [CategoryController::class, 'editCategory'])->name('edit.category');
 Route::post('/category/update/{category}', [CategoryController::class, 'updateCategory'])->name('update.category');
+// comment
+Route::get('comment', [CommentController::class, 'toviewcomment'])->name('view.comment');
+Route::post('comment', [CommentController::class, 'sendcomment'])->name('send.comment');
+Route::post('removecomment', [CommentController::class, 'deletecomment'])->name('delete.comment');
+
+
+
 Route::get('/', function () {
     return redirect()->route('login');
 });

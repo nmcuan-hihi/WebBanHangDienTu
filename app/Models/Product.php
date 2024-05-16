@@ -39,5 +39,9 @@ class Product extends Model
     {
         return $this->belongsTo(Manufacturer::class, 'manufacturer_id', 'manufacturer_id');
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'product_id', 'product_id');
+    }
 }
 

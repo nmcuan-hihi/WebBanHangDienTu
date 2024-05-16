@@ -143,20 +143,13 @@ class CustomAuthController extends Controller
     {
         // Kiểm tra xem người dùng đã đăng nhập hay chưa
         if (Auth::check()) {
-            // Lấy người dùng hiện tại
-            $user = Auth::user();
-
-            // Kiểm tra vai trò của người dùng
-            if ($user->role === 'admin') {
-                // Nếu vai trò là admin, chuyển hướng đến trang quản lý
-                $products = Product::paginate(7);
-                $categories = Category::all();
-                return view('manager.managerhome', compact('products', 'categories'));;
-            } elseif ($user->role === 'custom') {
-                // Nếu vai trò là custom, trả về trang chủ với sản phẩm phân trang
-                $products = Product::paginate(6);
-                return view('auth.home', compact('products'));
-            }
+            // // Lấy danh sách người dùng phân trang
+          //  $product = Product::paginate(20); // Số lượng trên mỗi trang 
+            $products = Product::paginate(5);
+            return view('auth.home', compact('products'));
+            // Trả về view 'auth.home' với dữ liệu người dùng phân trang
+            // return view('auth.home', ['product' => $product]);
+            // return view('auth.home', ['users' => $users]);
         }
 
         // Nếu người dùng chưa đăng nhập
@@ -185,7 +178,7 @@ class CustomAuthController extends Controller
             if ($tokenData) {
                 // Kiểm tra token đã hết hạn chưa (ví dụ: trong vòng 10 phút)
                 $tokenCreatedAt = Carbon::parse($tokenData->created_at);
-                $tokenExpiresAt = $tokenCreatedAt->addMinutes(1000000000000);
+                $tokenExpiresAt = $tokenCreatedAt->addMinutes(1000000);
                 if ($tokenExpiresAt->isPast()) {
                     return redirect()->back()->withErrors('Token da het han');
                 }

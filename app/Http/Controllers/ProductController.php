@@ -29,9 +29,9 @@ class ProductController extends Controller
 
         // Kiểm tra nếu không có yêu cầu lọc hoặc sắp xếp
         if (!$request->has('category') && !$request->has('sort')) {
-            $products = Product::paginate(6);
+            $products = Product::paginate(4);
         } else {
-            $products = $query->paginate(6);
+            $products = $query->paginate(4);
         }
 
         $categories = Category::all();
@@ -48,47 +48,48 @@ class ProductController extends Controller
         return view('manager.editproduct', ['product' => $prd, 'categories' => $categories, 'manufacturers' => $manufacturers]);
     }
     public function productedit(Request $request)
-{
-    $request->validate([
-        'product_id' => 'required|integer', // Thêm validation cho product_id
-        'product_name' => 'required|string',
-        'category_id' => 'required|integer',
-        'manufacturer_id' => 'required|integer',
-        'product_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra file hình ảnh (tối đa 2MB)// cho phep khong co anh moi van luu dc
-        'product_price' => 'required|numeric',
-        'warranty_period' => 'required|string',
-        'product_quantity' => 'required|integer',
-    ]);
+    {
+        $request->validate([
+            'product_id' => 'required|integer', // Thêm validation cho product_id
+            'product_name' => 'required|string',
+            'category_id' => 'required|integer',
+            'manufacturer_id' => 'required|integer',
+            'product_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra file hình ảnh (tối đa 2MB)// cho phep khong co anh moi van luu dc
+            'product_price' => 'required|numeric',
+            'warranty_period' => 'required|string',
+            'product_quantity' => 'required|integer',
+        ]);
 
-    // Tìm sản phẩm theo product_id
-    $product = Product::find($request->input('product_id'));
+        // Tìm sản phẩm theo product_id
+        $product = Product::find($request->input('product_id'));
 
-    if (!$product) {
-        return redirect()->route('manager')->with('error', 'Product not found');
+        if (!$product) {
+            return redirect()->route('manager')->with('error', 'Product not found');
+        }
+
+        $product->product_name = $request->input('product_name');
+        $product->category_id = $request->input('category_id');
+        $product->manufacturer_id = $request->input('manufacturer_id');
+
+        if ($request->hasFile('product_image')) {
+            // Lưu dữ liệu hình ảnh dưới dạng base64
+            $imageData = base64_encode(file_get_contents($request->file('product_image')->path()));
+            $product->product_image = $imageData;
+        }
+
+        $product->product_price = $request->input('product_price');
+        $product->warranty_period = $request->input('warranty_period');
+        $product->product_quantity = $request->input('product_quantity');
+
+        // Save the product to the database
+        $product->save();
+        // Token hợp lệ, thực hiện công việc cần thiết
+        $products = Product::paginate(7);
+        $categories = Category::all();
+        return view('manager.managerhome', compact('products', 'categories'))->with('success', 'Update successfully!');;
+        
     }
 
-    $product->product_name = $request->input('product_name');
-    $product->category_id = $request->input('category_id');
-    $product->manufacturer_id = $request->input('manufacturer_id');
-
-    if ($request->hasFile('product_image')) {
-        // Lưu dữ liệu hình ảnh dưới dạng base64
-        $imageData = base64_encode(file_get_contents($request->file('product_image')->path()));
-        $product->product_image = $imageData;
-    }
-
-    $product->product_price = $request->input('product_price');
-    $product->warranty_period = $request->input('warranty_period');
-    $product->product_quantity = $request->input('product_quantity');
-
-    // Save the product to the database
-    $product->save();
-
-    // Redirect with success message
-    return redirect()->route('manager')->with('success', 'Successfully updated!');
-}
-
-  
    
     public function showAddForm()
     {
@@ -160,4 +161,6 @@ class ProductController extends Controller
         $product = Product::find($product_id);
         return view('auth.item', ['product' => $product]);
     }
+=======
+>>>>>>> 0-cuan-fullchucnang
 }
