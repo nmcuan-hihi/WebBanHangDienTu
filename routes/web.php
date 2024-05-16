@@ -11,9 +11,9 @@ Route::post('addmanufacturers', [ManufacturersController::class, 'store'])->name
 Route::get('login', [CustomAuthController::class, 'toLogin'])->name('login');
 Route::post('login', [CustomAuthController::class, 'checkUser'])->name('user.checkUser');
 
+Route::get('home', [ProductController::class, 'index'])->name('home');
 Route::get('signout', [CustomAuthController::class, 'signout'])->name('signout');
 
-Route::get('home', [ProductController::class, 'index'])->name('home');
 
 Route::get('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
 
