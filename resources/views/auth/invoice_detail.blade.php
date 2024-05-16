@@ -28,11 +28,16 @@
             </thead>
             <tbody>
             @foreach ($invoiceDetails as $detail)
+                @php
+                    $totalBeforeTax = $detail->product ? $detail->product->product_price * $detail->invoice_details_quantity : 0;
+                    $tax = $totalBeforeTax * 0.10;
+                    $totalAfterTax = $totalBeforeTax + $tax;
+                @endphp
                 <tr>
                     <td>{{ $detail->product ? $detail->product->product_name : 'Product not available' }}</td>
                     <td>{{ $detail->product ? $detail->product->product_price : 'N/A' }}</td>
-                    <td>{{ $detail->quantity }}</td>
-                    <td>{{ $detail->price * $detail->quantity }}</td>
+                    <td>{{ $detail->invoice_details_quantity }}</td>
+                    <td>{{ number_format($totalAfterTax, 2) }}</td>
                 </tr>
             @endforeach
             </tbody>
