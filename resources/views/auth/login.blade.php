@@ -11,12 +11,8 @@
           <h3 class="card-header bg-dark text-center text-light">LOGIN</h3>
           <div class="card-body">
             <div class="container">
-<<<<<<< HEAD
-              @if ($errors->any()) 
-=======
-              <!-- kiểm tra xem có bất kỳ lỗi nào được trả về không -->
+          
               @if ($errors->any())
->>>>>>> origin/28-Thu-Quen_MK
               <div class="alert alert-success alert-dismissible">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
               

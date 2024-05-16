@@ -7,6 +7,8 @@ use App\Mail\LoginNotification;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\UserProfile;
+
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
