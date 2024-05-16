@@ -7,6 +7,8 @@ use App\Mail\LoginNotification;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\UserProfile;
+
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -27,7 +29,7 @@ class CustomAuthController extends Controller
     {
         return view('manager.checktocken');
     }
-   
+
     public function signout()
     {
         Session::flush();
@@ -41,47 +43,47 @@ class CustomAuthController extends Controller
     }
 
 
-   // hàm đăng ký tài khoản
-   public function createUser(Request $request)
-{
-    // Validate dữ liệu từ request
-    $request->validate([
-        'email' => 'required|email|unique:users',
-        'password' => 'required|min:6',
-        'name' => 'required',
-        'phone' => 'required',
-        'address' => 'required',
-        'sex' => 'required|in:male,female',
-        'role' => 'required|in:custom,admin',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra hình ảnh
-        // Thêm các quy tắc kiểm tra dữ liệu khác nếu cần thiết
-    ]);
+    // hàm đăng ký tài khoản
+    public function createUser(Request $request)
+    {
+        // Validate dữ liệu từ request
+        $request->validate([
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'sex' => 'required|in:male,female',
+            'role' => 'required|in:custom,admin',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra hình ảnh
+            // Thêm các quy tắc kiểm tra dữ liệu khác nếu cần thiết
+        ]);
 
-   // Lưu dữ liệu hình ảnh dưới dạng base64
-   $imageData = base64_encode(file_get_contents($request->file('image')->path()));
+        // Lưu dữ liệu hình ảnh dưới dạng base64
+        $imageData = base64_encode(file_get_contents($request->file('image')->path()));
 
-    // Tạo một bản ghi mới trong bảng users
-    $user = User::create([
-        'email' => $request->email,
-        'password' => bcrypt($request->password), // Hash mật khẩu trước khi lưu vào cơ sở dữ liệu
-        'role' => $request->role,
-    ]);
+        // Tạo một bản ghi mới trong bảng users
+        $user = User::create([
+            'email' => $request->email,
+            'password' => bcrypt($request->password), // Hash mật khẩu trước khi lưu vào cơ sở dữ liệu
+            'role' => $request->role,
+        ]);
 
-    // Tạo một bản ghi mới trong bảng user_profile
-    $userProfile = UserProfile::create([
-        'user_id' => $user->id,
-        'name' => $request->name,
-        'phone' => $request->phone,
-        'address' => $request->address,
-        'sex' => $request->sex,
-        'image' => $imageData, // Lưu đường dẫn hình ảnh vào cơ sở dữ liệu
-        
-    ]);
+        // Tạo một bản ghi mới trong bảng user_profile
+        $userProfile = UserProfile::create([
+            'user_id' => $user->id,
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'sex' => $request->sex,
+            'image' => $imageData, // Lưu đường dẫn hình ảnh vào cơ sở dữ liệu
 
-    // Chuyển hướng người dùng đến trang đăng nhập
-    return redirect()->route('login');
-}
-  
+        ]);
+
+        // Chuyển hướng người dùng đến trang đăng nhập
+        return redirect()->route('login');
+    }
+
 
 
     public function checkUser(Request $request)
@@ -121,10 +123,19 @@ class CustomAuthController extends Controller
                 return redirect()->intended('home')->withSuccess('Signed in');
             } else {
                 return redirect()->route('login')->withErrors('Login FAIL');
+                switch ($user->role) {
+                    case 'admin':
+                        return redirect()->intended('manager')->withSuccess('Signed in with admin');
+                        break;
+                    case 'custom':
+                        return redirect()->intended('home')->withSuccess('Signed in');
+                    default:
+                        redirect("login")->withSuccess('Login FAIL'); // gọi router có tên login
+                }
             }
-        }
 
-        return redirect()->route('login')->withErrors('Login FAIL');
+            return redirect()->route('login')->withErrors('Login FAIL');
+        }
     }
     public function gohome(Request $request)
     {
@@ -142,6 +153,7 @@ class CustomAuthController extends Controller
         // Nếu người dùng chưa đăng nhập
         return redirect("login")->withSuccess('You are not allowed to access');
     }
+
     public function gomanager(Request $request)
     {
         // Kiểm tra người dùng đã đăng nhập hay chưa
