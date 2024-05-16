@@ -83,11 +83,11 @@ class CustomAuthController extends Controller
         $category->category_name = $request->input('category_name');
         $category->save();
     
-        return view('manager.managerhome')->with('success', 'Danh mục đã được thêm mới thành công.');
+        return redirect("addcategory")->with('success', 'Danh mục đã được thêm mới thành công.');
     }
     public function deleteCategorys(Request $request ){
         $category_id = $request->get('id');
         $category = Category::destroy($category_id);
-        return redirect("manager.addcategory")->withSuccess('You have signed-in');
+        return redirect("addcategory")->with('success', 'Danh mục đã được xóa thành công.');
     }
 }
