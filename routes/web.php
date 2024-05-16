@@ -9,11 +9,15 @@ use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\CustomCssFile;
 
 Route::get('tocken', [CustomAuthController::class, 'tochecktocken'])->name('token');
+
 use App\Http\Controllers\ForgotController;
 
 
 Route::get('login', [CustomAuthController::class, 'toLogin'])->name('login');
 Route::post('login', [CustomAuthController::class, 'checkUser'])->name('user.checkUser');
+
+Route::get('register', [CustomAuthController::class, 'toRegister'])->name('register');
+Route::post('register', [CustomAuthController::class, 'createUser'])->name('user.createUser');
 
 Route::get('signout', [CustomAuthController::class, 'signout'])->name('signout');
 
