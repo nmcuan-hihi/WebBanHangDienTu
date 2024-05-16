@@ -17,7 +17,7 @@ class UserController extends Controller
         // Kiểm tra xem người dùng đã đăng nhập hay chưa
         if (Auth::check()) {
             // Lấy danh sách người dùng phân trang
-            $users = User::paginate(10); // Số lượng người dùng trên mỗi trang 
+            $users = User::paginate(3); // Số lượng người dùng trên mỗi trang 
 
             // Trả về view 'auth.home' với dữ liệu người dùng phân trang
             return view('manager.manageruser', ['users' => $users]);

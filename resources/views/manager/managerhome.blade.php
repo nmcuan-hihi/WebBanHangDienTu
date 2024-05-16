@@ -8,10 +8,14 @@
     <div class="alert alert-success">
         <i class="fas fa-check-circle"></i> {{ Session::get('success') }}
     </div>
-<<<<<<< HEAD
     @endif -->
 
 
+    <div class="clearfix"></div>
+    <a href="{{ route('manageruser') }}" class="btn btn-info btn-sm">
+        <span class="material-icons">visibility</span> Danh sách User
+    </a>
+</div>
 
 
 </div>
@@ -101,14 +105,5 @@
 
 
 
-<div class="clearfix"></div>
 
-=======
-    @endif
-    <a href="{{ route('manageruser') }}" class="btn btn-info btn-sm">
-        <span class="material-icons">visibility</span> Danh sách User
-    </a>
-</div>
-
->>>>>>> origin/26-Thu-Danh_Sach_User
 @endsection
