@@ -297,4 +297,12 @@ class CartController extends Controller
         // Redirect lại trang giỏ hàng
         return redirect()->route('add.cart');
     }
+    public function show($id)
+{
+    $invoice = Invoice::with('details.product')->findOrFail($id);
+    $userProfile = UserProfile::where('user_id', $invoice->user_id)->first();
+
+    return view('invoices.show', compact('invoice', 'userProfile'));
+}
+
 }
