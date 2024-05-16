@@ -8,29 +8,14 @@
     <div class="row justify-content-center">
       <div class="col-md-4">
         <div class="card" style="border: 2px solid black;">
-          <h3 class="card-header bg-dark text-center text-light">LOGIN</h3>
+          <h3 class="card-header bg-dark text-center text-light">Change Password</h3>
           <div class="card-body">
             <div class="container">
-<<<<<<< HEAD
-              @if ($errors->any()) 
-=======
-              <!-- kiểm tra xem có bất kỳ lỗi nào được trả về không -->
-              @if ($errors->any())
->>>>>>> origin/28-Thu-Quen_MK
-              <div class="alert alert-success alert-dismissible">
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-              
-                <strong> {{ $errors->first('login') }}</strong>
-              </div>
-              @endif
-              @if(session('success'))
-              <div class="alert alert-success">
-                {{ session('success') }}
-              </div>
-              @endif
-              <form action="{{ route('user.checkUser') }}" method="POST">
+            
+             
+              <form action="{{ route('reset.password.post') }}" method="POST">
                 @csrf
-
+                <input type="hidden" name="token" value="{{ $token }}">
                 <div class="mb-3 mt-3">
                   <label for="email" class="form-label">Email:</label>
                   <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
@@ -39,18 +24,24 @@
                   <label for="password" class="form-label">Password:</label>
                   <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
                 </div>
+
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password:</label>
+                  <input type="password" class="form-control" id="password" placeholder="Enter password" name="password_confirmation">
+                </div>
+               
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
               </form>
 
-              <a href="{{ route('forgot.password.form') }}">quen mat khau</a>
+              
 
             </div>
-
+        
           </div>
         </div>
       </div>
     </div>
-
+    
   </div>
 </main>
 @endsection
