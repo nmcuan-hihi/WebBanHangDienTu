@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
         include_once public_path('images/img.php');
         $img = IMG_VALUE;
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
         DB::table('users')->insert([           
-            'email' => 'vuvanhuy020604@gmail.com',            
+            'email' => 'anh52549@gmail.com',            
             'password' => Hash::make('123123'),
             'role' => 'admin',
         ]);
@@ -36,8 +36,9 @@ class DatabaseSeeder extends Seeder
                 'product_quantity' => 200,
             ]);
         }
-=======
->>>>>>> origin/26-Thu-Danh_Sach_User
+// =======
+// >>>>>>> origin/26-Thu-Danh_Sach_User
+
 
         DB::table('users')->insert([           
             'email' => 'admin@gmail.com',            

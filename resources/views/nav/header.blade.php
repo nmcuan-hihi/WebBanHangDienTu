@@ -27,7 +27,7 @@
             <a class="nav-link" href="#">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('register') }}">Sign up</a>
+            <a class="nav-link" href="#">Sign up</a>
           </li>
           @else
           <li class="nav-item">
@@ -54,6 +54,9 @@
           @elseif(Auth::user()->role === 'admin')
           <li class="nav-item">
             <span class="nav-link">Login to Admin: {{ Auth::user()->email }}</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sign up</a>
           </li>
           @endif
           @endauth
