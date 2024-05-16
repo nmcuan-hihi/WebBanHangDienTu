@@ -11,11 +11,10 @@
           <h3 class="card-header bg-dark text-center text-light">LOGIN</h3>
           <div class="card-body">
             <div class="container">
-            <!-- kiểm tra xem có bất kỳ lỗi nào được trả về không -->
               @if ($errors->any()) 
               <div class="alert alert-success alert-dismissible">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                <!-- lỗi đầu tiên của trường 'login' -->
+              
                 <strong> {{ $errors->first('login') }}</strong>
               </div>
               @endif
@@ -30,11 +29,6 @@
                   <label for="password" class="form-label">Password:</label>
                   <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
                 </div>
-                <!-- <div class="form-check mb-3">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="remember"> Remember me
-                  </label>
-                </div> -->
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
               </form>
             </div>

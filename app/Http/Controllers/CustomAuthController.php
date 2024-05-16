@@ -27,12 +27,14 @@ class CustomAuthController extends Controller
     {
         return view('manager.checktocken');
     }
+   
     public function signout()
     {
         Session::flush();
         Auth::logout();
         return Redirect('login');
     }
+
     public function checkUser(Request $request)
     {
         $request->validate([
