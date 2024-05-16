@@ -83,8 +83,9 @@ class ProductController extends Controller
     // Save the product to the database
     $product->save();
 
-    // Redirect with success message
-    return redirect()->route('manager')->with('success', 'Successfully updated!');
+    $products = Product::paginate(7);
+    $categories = Category::all();
+    return view('manager.managerhome', compact('products', 'categories'));
 }
 
 }
