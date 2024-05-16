@@ -22,8 +22,8 @@ class InvoiceDetail extends Model
     {
         return $this->belongsTo(Invoice::class);
     }
-    public function product() : BelongsTo 
-    {
-        return $this->belongsTo(Product::class);
-    }
+    public function product()
+{
+    return $this->belongsTo(Product::class, 'product_id'); // Giả sử 'product_id' là khóa ngoại trong InvoiceDetail
+}
 }
