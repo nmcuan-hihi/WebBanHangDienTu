@@ -34,6 +34,19 @@
         @endif
 
         <h2>List of Manufacturers</h2>
+        <div class="mb-3">
+            <form action="{{ route('manufacturerList') }}" method="GET">
+                <div class="form-group">
+                    <label for="sort_by">Sort By:</label>
+                    <select class="form-control" id="sort_by" name="sort_by" onchange="this.form.submit()">
+                        <option value="" disabled selected>Choose an option</option>
+                        <option value="name_asc">Name (A-Z)</option>
+                        <option value="name_desc">Name (Z-A)</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -41,7 +54,7 @@
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>Acition</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>

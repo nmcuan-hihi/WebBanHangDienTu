@@ -23,6 +23,9 @@ use App\Http\Controllers\InvoiceController;
 //Route::post('/send-invoice', [InvoiceController::class, 'sendInvoice'])->name('send.invoice');
 
 Route::get('addmanufacturers', [ManufacturersController::class, 'showAddForm'])->name('add.manufacturer');
+
+Route::get('manufacturerList', [ManufacturersController::class, 'list'])->name('manufacturerList');
+
 Route::post('addmanufacturers', [ManufacturersController::class, 'store'])->name('store.manufacturer');
 Route::get('/edit/manufacturer/{manufacturer_id}', [ManufacturersController::class, 'edit'])->name('edit.manufacturer');
 Route::put('/update/manufacturer/{manufacturer_id}', [ManufacturersController::class, 'update'])->name('update.manufacturer');
