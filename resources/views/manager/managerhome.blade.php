@@ -12,9 +12,7 @@
 
 
     <div class="clearfix"></div>
-    <a href="{{ route('manageruser') }}" class="btn btn-info btn-sm">
-        <span class="material-icons">visibility</span> Danh sách User
-    </a>
+   
 </div>
 
 
