@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Mail\LoginNotification;
-use App\Models\Category;
+
 use App\Models\Product;
 use App\Models\User;
 use App\Models\UserProfile;
@@ -204,7 +204,6 @@ class CustomAuthController extends Controller
         return redirect("login")->withSuccess('You are not allowed to access');
     }
 
-<<<<<<< HEAD
 
 
     public function backhome()
@@ -219,6 +218,4 @@ class CustomAuthController extends Controller
         $categories = Category::all();
         return view('manager.managerhome', compact('products', 'categories'));
     }
-=======
->>>>>>> 5-Tun_Sua_Danh_Muc
 }

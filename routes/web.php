@@ -2,14 +2,14 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomAuthController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
-=======
+
 use App\Http\Controllers\CategoryController;
 
->>>>>>> 5-Tun_Sua_Danh_Muc
+
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\CustomCssFile;
 
@@ -34,7 +34,6 @@ Route::post('register', [CustomAuthController::class, 'createUser'])->name('user
 Route::get('signout', [CustomAuthController::class, 'signout'])->name('signout');
 
 Route::get('home', [CustomAuthController::class, 'gohome'])->name('home');
-<<<<<<< HEAD
 Route::post('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
 
 Route::get('manager', [CustomAuthController::class, 'backmanager'])->name('backmanager');
@@ -82,15 +81,12 @@ Route::get('/purchase-history', [CartController::class, 'purchaseHistory'])->nam
 Route::post('/finalize-purchase', [CartController::class, 'finalizePurchase'])->name('finalize.purchase');
 Route::get('/invoice/{id}', [CartController::class, 'viewInvoice'])->name('invoice.detail');
 
-=======
-Route::get('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
 
 Route::get('addcategory', [CategoryController::class, 'toAddCategory'])->name('addcategory');
 Route::post('addcategory', [CategoryController::class, 'addCategory'])->name('category.add');
 
 Route::get('/category/edit/{category}', [CategoryController::class, 'editCategory'])->name('edit.category');
 Route::post('/category/update/{category}', [CategoryController::class, 'updateCategory'])->name('update.category');
->>>>>>> 5-Tun_Sua_Danh_Muc
 Route::get('/', function () {
     return redirect()->route('login');
 });

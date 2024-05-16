@@ -62,6 +62,12 @@
             <a class="nav-link" href="{{ route('add.manufacturer') }}">Thêm nhà cung cấp</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href=" {{ route('addcategory') }}">Thêm danh mục</a>
+          </li>
+          
+
+         
+          <li class="nav-item">
             <a class="nav-link" href="{{ route('manageruser') }}">Quản Lý User</a>
           </li>    
           <li class="nav-item">

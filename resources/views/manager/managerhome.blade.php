@@ -15,13 +15,7 @@
    
 </div>
 
-<<<<<<< HEAD
-=======
-    <a href="{{ route('addcategory') }}" class="btn btn-info btn-sm">
-        <span class="material-icons">visibility</span> Thêm danh mục
-    </a>
     
->>>>>>> 5-Tun_Sua_Danh_Muc
 
 </div>
 
