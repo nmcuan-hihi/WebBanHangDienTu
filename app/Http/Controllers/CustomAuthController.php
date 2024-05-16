@@ -95,17 +95,17 @@ class CustomAuthController extends Controller
         return redirect("login")->withSuccess('You are not allowed to access');
     }
 
+
     //hien thi chi tiet thong tin user.
+    //hien thi chi tiet thong tin user
     public function showinfouser(Request $request)
     {
         $user_id = $request->get('id');
-        
-        // Tìm người dùng dựa trên ID
         $user = User::find($user_id);
         
         return view('manager.itemuser', ['user' => $user]);
     }
-     //xoa user
+    //xoa user
     
     public function deleteUser(Request $request)
 
@@ -117,4 +117,5 @@ class CustomAuthController extends Controller
         
         return view('manager.itemuser', ['user' => $user]);
     }
+   
 }
