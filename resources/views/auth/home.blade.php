@@ -33,6 +33,27 @@
     </form>
 </div>
 
+<div class="row justify-content-end">
+    
+    <div class="col-auto">
+        <a href="{{ route('purchase.history') }}" class="btn btn-info btn-sm">
+            <span class="material-icons icon-small">business</span> Lịch sử mua hàng
+        </a>
+    </div>
+    <div class="col-auto">
+        <form action="{{ route('product.search') }}" method="GET" class="form-inline">
+            <div class="input-group">
+                <input class="form-control" type="search" name="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="submit"><span
+                            class="material-icons">search</span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
 <!-- Hiển thị sản phẩm -->
 <div class="container mt-3">
     <div class="row">
