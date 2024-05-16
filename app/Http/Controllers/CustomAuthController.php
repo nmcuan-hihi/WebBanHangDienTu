@@ -79,7 +79,8 @@ class CustomAuthController extends Controller
 
     public function toAddCategory()
     {
-        return view('manager.addcategory');
+        $categories = Category::all();
+        return view('manager.addcategory', compact('categories'));
     }
 
     public function addCategory(Request $request)
@@ -94,7 +95,8 @@ class CustomAuthController extends Controller
         $category->category_name = $request->input('category_name');
         $category->save();
     
-        // Chuyển hướng về trang danh sách danh mục hoặc trang khác tuỳ theo yêu cầu của bạn
-        return view('manager.managerhome')->with('success', 'Danh mục đã được thêm mới thành công.');
+        $categories = Category::all(); 
+    
+        return view('manager.addcategory', compact('categories'))->with('success', 'Danh mục đã được thêm mới thành công.');
     }
 }

@@ -20,6 +20,31 @@
                     </form>
                 </div>
             </div>
+
+
+            <h2>List of category</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>                  
+                            <th>Acition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($categories as $category)
+                        <tr>
+                            <td>{{ $category->category_name }}</td>
+
+                            <td>
+                              
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 </div>
