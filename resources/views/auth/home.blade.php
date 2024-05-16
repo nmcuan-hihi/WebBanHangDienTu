@@ -8,7 +8,7 @@
         <i class="fas fa-check-circle"></i> {{ Session::get('success') }}
     </div>
     @endif -->
-
+    
     <div class="row justify-content-end">
         <div class="col-auto">
             <a href="{{ route('addproduct') }}" class="btn btn-info btn-sm">
@@ -18,6 +18,11 @@
         <div class="col-auto">
             <a href="{{ route('add.manufacturer') }}" class="btn btn-info btn-sm">
                 <span class="material-icons icon-small">business</span> Add Manufacturers
+            </a>
+        </div>
+        <div class="col-auto">
+            <a href="{{ route('purchase.history') }}" class="btn btn-info btn-sm">
+                <span class="material-icons icon-small">business</span> Lịch sử mua hàng
             </a>
         </div>
         <div class="col-auto">

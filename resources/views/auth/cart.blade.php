@@ -38,5 +38,11 @@
             @endforeach
         </tbody>
     </table>
+    <div class="d-flex justify-content-end">
+        <form action="{{ route('cart.purchase') }}" method="post">
+            @csrf
+            <button type="submit" class="btn btn-success">Purchase</button>
+        </form>
+    </div>
 </div>
 @endsection
