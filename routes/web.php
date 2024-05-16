@@ -15,7 +15,7 @@ Route::post('editcategory/{id}', [CustomAuthController::class, 'editCategory'])-
 
 
 //Route::delete('categories/{id}', [CustomAuthController::class, 'deleteCategory'])->name('category.delete');
-Route::get('deleteCategory',[CustomAuthController::class, 'deleteCategorys'] )->name('deleteCategory');
+Route::post('deleteCategory',[CustomAuthController::class, 'deleteCategorys'] )->name('deleteCategory');
 Route::get('/', function () {
     return view('auth.login');
 });

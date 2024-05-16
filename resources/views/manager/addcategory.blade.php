@@ -44,7 +44,6 @@
                                         <form action="{{ route('deleteCategory', ['id' => $category->category_id]) }}"
                                             method="POST">
                                             @csrf
-                                            @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm"
                                                 onclick="return confirm('Bạn có chắc muốn xóa?')">
                                                 <span class="material-icons">delete</span> Xóa
