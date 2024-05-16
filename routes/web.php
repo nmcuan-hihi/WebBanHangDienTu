@@ -25,6 +25,9 @@ Route::post('removecart', [CartController::class, 'removetocart'])->name('remove
 
 // comment
 Route::get('comment', [CommentController::class, 'toviewcomment'])->name('view.comment');
+Route::post('comment', [CommentController::class, 'sendcomment'])->name('send.comment');
+Route::post('removecomment', [CommentController::class, 'deletecomment'])->name('delete.comment');
+
 
 Route::get('/', function () {
     return view('auth.login');
