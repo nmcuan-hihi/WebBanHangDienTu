@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-
+use App\Models\Category;
 class CustomAuthController extends Controller
 {
     public function toLogin()
@@ -204,6 +204,7 @@ class CustomAuthController extends Controller
         return redirect("login")->withSuccess('You are not allowed to access');
     }
 
+<<<<<<< HEAD
 
 
     public function backhome()
@@ -218,4 +219,6 @@ class CustomAuthController extends Controller
         $categories = Category::all();
         return view('manager.managerhome', compact('products', 'categories'));
     }
+=======
+>>>>>>> 5-Tun_Sua_Danh_Muc
 }

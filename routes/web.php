@@ -5,6 +5,10 @@ use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+
+use App\Http\Controllers\CategoryController;
+
+
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\CustomCssFile;
 
@@ -75,6 +79,15 @@ Route::get('/purchase-history', [CartController::class, 'purchaseHistory'])->nam
 
 Route::post('/finalize-purchase', [CartController::class, 'finalizePurchase'])->name('finalize.purchase');
 Route::get('/invoice/{id}', [CartController::class, 'viewInvoice'])->name('invoice.detail');
+
+
+Route::get('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
+
+Route::get('addcategory', [CategoryController::class, 'toAddCategory'])->name('addcategory');
+Route::post('addcategory', [CategoryController::class, 'addCategory'])->name('category.add');
+
+Route::get('/category/edit/{category}', [CategoryController::class, 'editCategory'])->name('edit.category');
+Route::post('/category/update/{category}', [CategoryController::class, 'updateCategory'])->name('update.category');
 
 Route::get('/', function () {
     return redirect()->route('login');
