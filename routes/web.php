@@ -53,7 +53,6 @@ Route::get('edituser', [UserController::class, 'editUser'])->name('user.edit');
 Route::post('edituser', [UserController::class, 'cfeditUser'])->name('user.update');
 Route::get('deleteuser', [UserController::class, 'deleteUser'])->name('user.delete');
 Route::get('home', [ProductController::class, 'index'])->name('home');
-Route::get('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
 Route::get('addproduct', [ProductController::class, 'showAddForm'])->name('addproduct');
 Route::post('addproduct', [ProductController::class, 'store'])->name('store.product');
 Route::get('product/image/{id}', [ProductController::class, 'getProductImage'])->name('get.product.image');
