@@ -29,11 +29,8 @@
                 <ul class="navbar-nav me-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Sign up</a>
-                    </li>
+                        <a class="nav-link" href="{{ route('signout') }}">Login</a>
+                    </li>                  
 
             </div>
         </div>
