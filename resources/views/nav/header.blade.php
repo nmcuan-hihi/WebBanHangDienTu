@@ -27,11 +27,15 @@
             <a class="nav-link" href="{{ route('login') }}">Login</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="{{ route('register') }}">Sign up</a>
+            <a class="nav-link" href="{{ route('register') }}">Sign up</a>
           </li>
           @else
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('home') }}">Home</a>
+            @if(Auth::user()->role === 'custom')
+              <a class="nav-link" href="{{ route('home') }}">Home</a>
+            @elseif(Auth::user()->role === 'admin')
+              <a class="nav-link" href="{{ route('backmanager') }}">Home</a>
+            @endif
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('signout') }}">Logout</a>
@@ -46,8 +50,7 @@
             <p class="pt-2">{{Auth::user()->email}}</p>
           </li>
           <li class="nav-item">
-
-            <a href="{{ route('cart') }}" class="nav-link" href="#">
+            <a href="{{ route('cart') }}" class="nav-link">
               <span class="material-icons">shopping_cart</span>
             </a>
           </li>
@@ -64,12 +67,9 @@
           <li class="nav-item">
             <span class="nav-link">Login to Admin: {{ Auth::user()->email }}</span>
           </li>
-          
           @endif
           @endauth
         </ul>
-
-
       </div>
     </div>
   </nav>

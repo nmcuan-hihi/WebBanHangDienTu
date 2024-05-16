@@ -31,6 +31,11 @@ Route::get('signout', [CustomAuthController::class, 'signout'])->name('signout')
 Route::get('home', [CustomAuthController::class, 'gohome'])->name('home');
 Route::post('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
 
+Route::get('manager', [CustomAuthController::class, 'backmanager'])->name('backmanager');
+
+
+
+
 Route::get('filter-products', [ProductController::class, 'index'])->name('filterProducts');
 //Route::get('home', [ProductController::class, 'index'])->name('filterProducts');
 Route::get('product', [ProductController::class, 'toproductedit'])->name('product.edit');
