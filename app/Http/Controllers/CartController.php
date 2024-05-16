@@ -77,6 +77,18 @@ class CartController extends Controller
         // Chuyển dữ liệu đến view
         return view('auth.purchase_history', compact('invoices'));
     }
+    public function delete($id)
+    {
+        $invoice = Invoice::findOrFail($id);
+        $invoice->delete();
+    
+        // Lưu thông báo thành công vào session
+        session()->flash('success', 'Xóa hóa đơn thành công!');
+    
+        // Chuyển hướng người dùng về trang home
+        return redirect()->route('home');
+    }
+    
     
 
     public function index()

@@ -19,13 +19,20 @@ Route::get('addproduct', [ProductController::class, 'showAddForm'])->name('addpr
 Route::post('addproduct', [ProductController::class, 'store'])->name('store.product');
 Route::get('product/image/{id}', [ProductController::class, 'getProductImage'])->name('get.product.image');
 Route::get('/search', [ProductController::class, 'search'])->name('product.search');
-
 Route::post('cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('cart', [CartController::class, 'index'])->name('add.cart');
 Route::post('cart/updateQuantity', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');
 Route::post('cart/remove', [CartController::class, 'removeItem'])->name('cart.remove');
 Route::post('/cart/purchase', [CartController::class, 'purchase'])->name('cart.purchase');
 Route::get('/purchase-history', [CartController::class, 'purchaseHistory'])->name('purchase.history');
+Route::delete('/invoices/{id}', [InvoiceController::class, 'delete'])->name('invoice.delete');
+
+
+Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoice.index');
+
+
+
+
 Route::post('/send-invoice', [CartController::class, 'sendInvoiceEmail'])->name('send.invoice');
 Route::post('/finalize-purchase', [CartController::class, 'finalizePurchase'])->name('finalize.purchase');
 Route::get('/invoice/{id}', [CartController::class, 'viewInvoice'])->name('invoice.detail');
