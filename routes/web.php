@@ -30,4 +30,4 @@ Route::post('cart/remove', [CartController::class, 'removeItem'])->name('cart.re
 
 Route::get('/', function () {
     return redirect()->route('login');
-});
+});     

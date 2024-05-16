@@ -21,7 +21,6 @@
                 <label for="manufacturer_email">Manufacturer Email:</label>
                 <input type="email" class="form-control" id="manufacturer_email" name="manufacturer_email">
             </div>
-
             <button type="submit" class="btn btn-primary">Add Manufacturer</button>
         </form>
 
