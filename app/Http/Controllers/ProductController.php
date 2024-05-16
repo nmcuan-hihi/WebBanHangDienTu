@@ -86,5 +86,9 @@ class ProductController extends Controller
     // Redirect with success message
     return redirect()->route('manager')->with('success', 'Successfully updated!');
 }
-
+public function show(Request $request){
+    $product_id = $request->get('id');
+    $product = Product::find($product_id);
+    return view('auth.item', ['product' => $product]);
+}
 }

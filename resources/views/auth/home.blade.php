@@ -41,7 +41,7 @@
             <div class="card">
                 <img src="data:image;base64,{{ $product->product_image }}" alt="Product Image" class="card-img-top" style="height: 200px; object-fit: cover;">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $product->product_name }}</h5>
+                <a href="{{ route('showProductDetail', ['id' => $product->product_id]) }}"><h5 class="card-title">{{ $product->product_name }}</h5></a>
                     <p class="card-text">Price: ${{ $product->product_price }}</p>
                     <form action="{{ route('cart') }}" method="post">
                             @csrf

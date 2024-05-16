@@ -19,7 +19,7 @@ Route::post('manager', [CustomAuthController::class, 'gomanager'])->name('manage
 Route::get('home', [ProductController::class, 'index'])->name('filterProducts');
 Route::get('product', [ProductController::class, 'toproductedit'])->name('product.edit');
 Route::post('product', [ProductController::class, 'productedit'])->name('conflim.edit.product');
-
+Route::get('showProductDetail',[ProductController:: class, 'show'])->name('showProductDetail');
 // cart
 Route::post('cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('cart', [CartController::class, 'tocart'])->name('add.cart');

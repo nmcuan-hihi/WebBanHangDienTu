@@ -20,7 +20,7 @@ return new class extends Migration
             $table->longText('image'); 
             $table->string('sex');       
             $table->timestamps();
-        });
+        });        
     }
 
     /**
