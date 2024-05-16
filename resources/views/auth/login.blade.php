@@ -24,6 +24,14 @@
                 {{ session('success') }}
               </div>
               @endif
+              <!-- kiểm tra xem có bất kỳ lỗi nào được trả về không -->
+              @if ($errors->any())
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          <!-- lỗi đầu tiên của trường 'login' -->
+          <strong> {{ $errors->first('login') }}</strong>
+        </div>
+      @endif
               <form action="{{ route('user.checkUser') }}" method="POST">
                 @csrf
 
@@ -33,7 +41,8 @@
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label">Password:</label>
-                  <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+                  <input type="password" class="form-control" id="password" placeholder="Enter password"
+                    name="password">
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
               </form>

@@ -17,6 +17,19 @@ class DatabaseSeeder extends Seeder
 
         include_once public_path('images/img.php');
         $img = IMG_VALUE;
+        for ($i = 1; $i <= 50; $i++) {
+            // Thêm dữ liệu vào bảng 'product' trong cơ sở dữ liệu
+            DB::table('product')->insert([
+                'category_id' => 1,
+                'manufacturer_id' => 1,
+                'product_name' => 'Iphone ' . $i,
+                'product_image' => IMG_VALUE, // Thay 'IMG_VALUE' bằng giá trị hình ảnh thực tế
+                'product_price' => 5000.00,
+                'warranty_period' => 12,
+                'product_quantity' => 200,
+            ]);
+        }
+
 
 // <<<<<<< HEAD
         DB::table('users')->insert([           
@@ -66,6 +79,32 @@ class DatabaseSeeder extends Seeder
             'image' => $img,
             'sex' => 'boy',
         ]);
+        // DB::table('users')->insert([           
+        //     'email' => 'admin@gmail.com',            
+        //     'password' => Hash::make('123123'),
+        //     'role' => 'admin',
+        // ]);
+        // DB::table('users')->insert([           
+        //     'email' => 'cus@gmail.com',            
+        //     'password' => Hash::make('123123'),
+        //     'role' => 'custom',
+        // ]);
+        // DB::table('user_profile')->insert([           
+        //     'user_id' => '1',                       
+        //     'name' => 'nmcuan',
+        //     'phone' => '098453451',
+        //     'address' => 'ThuDuc',
+        //     'image' => $img,
+        //     'sex' => 'boy',
+        // ]);
+        // DB::table('user_profile')->insert([           
+        //     'user_id' => '2',                       
+        //     'name' => 'nmcuan',
+        //     'phone' => '098453451',
+        //     'address' => 'ThuDuc',
+        //     'image' => $img,
+        //     'sex' => 'boy',
+        // ]);
 
         DB::table('category')->insert([
             'category_name' => 'Smart Phone',

@@ -8,6 +8,7 @@
     </div>
     @endif
     @if(session('cart') && count(session('cart')) > 0)
+<div class="container">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -20,27 +21,27 @@
         </thead>
         <tbody>
             @foreach(session('cart') as $item)
-            <tr>
-                <td>{{ $item['name'] }}</td>
-                <td>${{ $item['price'] }}</td>
-                <td>
-                    <form action="#" method="post" class="d-flex">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $item['id'] }}">
-                        <button type="submit" name="action" value="decrease" class="btn btn-sm btn-outline-primary">-</button>
-                        <span class="mx-2">{{ $item['quantity'] }}</span>
-                        <button type="submit" name="action" value="increase" class="btn btn-sm btn-outline-primary">+</button>
-                    </form>
-                </td>
-                <td>${{ $item['price'] * $item['quantity'] }}</td>
-                <td>
-                    <form action="{{ route('remove.cart') }}" method="post">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $item['id'] }}">
-                        <button type="submit" class="btn btn-sm btn-danger">Remove</button>
-                    </form>
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ $item['name'] }}</td>
+                    <td>${{ $item['price'] }}</td>
+                    <td>
+                        <form action="{{ route('cart.updateQuantity') }}" method="post" class="d-flex">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $item['id'] }}">
+                            <button type="submit" name="action" value="decrease" class="btn btn-sm btn-outline-primary">-</button>
+                            <span class="mx-2">{{ $item['quantity'] }}</span>
+                            <button type="submit" name="action" value="increase" class="btn btn-sm btn-outline-primary">+</button>
+                        </form>
+                    </td>
+                    <td>${{ $item['price'] * $item['quantity'] }}</td>
+                    <td>
+                        <form action="{{ route('cart.remove') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $item['id'] }}">
+                            <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
