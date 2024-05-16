@@ -155,4 +155,9 @@ class ProductController extends Controller
         $product = Product::destroy($product_id);
         return redirect("manager")->withSuccess('You have signed-in');
     }
+    public function show(Request $request){
+        $product_id = $request->get('id');
+        $product = Product::find($product_id);
+        return view('auth.item', ['product' => $product]);
+    }
 }

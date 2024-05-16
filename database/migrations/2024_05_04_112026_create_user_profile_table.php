@@ -20,7 +20,7 @@ return new class extends Migration
             $table->longText('image')->nullable();
             $table->string('sex')->nullable();;
             $table->timestamps();
-        });
+        });        
     }
 
     /**

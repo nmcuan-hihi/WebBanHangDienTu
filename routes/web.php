@@ -46,7 +46,7 @@ Route::get('product', [ProductController::class, 'toproductedit'])->name('produc
 Route::post('product', [ProductController::class, 'productedit'])->name('conflim.edit.product');
 // delete product
 Route::get('deleteProduct',[ProductController:: class, 'delete'])->name('deleteProduct');
-
+Route::get('showProductDetail',[ProductController:: class, 'show'])->name('showProductDetail');
 // cart
 Route::post('cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('cart', [CartController::class, 'tocart'])->name('add.cart');
