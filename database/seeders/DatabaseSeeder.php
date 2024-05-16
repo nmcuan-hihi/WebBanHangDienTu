@@ -18,11 +18,11 @@ class DatabaseSeeder extends Seeder
         include_once public_path('images/img.php');
         $img = IMG_VALUE;
 
-        DB::table('users')->insert([           
-            'email' => 'moclopxebo3@gmail.com',            
-            'password' => Hash::make('123123'),
-            'role' => 'admin',
-        ]);
+        // DB::table('users')->insert([           
+        //     'email' => 'moclopxebo3@gmail.com',            
+        //     'password' => Hash::make('123123'),
+        //     'role' => 'admin',
+        // ]);
         // for ($i = 1; $i <= 50; $i++) {
         //     // Thêm dữ liệu vào bảng 'product' trong cơ sở dữ liệu
         //     DB::table('product')->insert([
@@ -34,7 +34,19 @@ class DatabaseSeeder extends Seeder
         //         'warranty_period' => 12,
         //         'product_quantity' => 200,
         //     ]);
-        // }
+        // }  
+        for ($i = 1; $i <= 50; $i++) {
+            // Thêm dữ liệu vào bảng 'product' trong cơ sở dữ liệu
+            DB::table('product')->insert([
+                'category_id' => 2,
+                'manufacturer_id' => 2,
+                'product_name' => 'lap top ' . $i,
+                'product_image' => IMG_VALUE, // Thay 'IMG_VALUE' bằng giá trị hình ảnh thực tế
+                'product_price' => 5000.00 * $i,
+                'warranty_period' => 12,
+                'product_quantity' => 200,
+            ]);
+        }
 
         // DB::table('users')->insert([           
         //     'email' => 'admin@gmail.com',            
