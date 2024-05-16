@@ -15,9 +15,8 @@
                             <img src="data:image;base64,{{ $product->product_image }}" alt="image" style="width: 400px; height: 400px;" />
                         </div>
                         <div class="col-md-7">
-                            <h4>Name: {{ $product->name }}</h4>
-                            <p><strong>Email: </strong> {{ $product->product_name }}</p>
-                            <p><strong>Phone: </strong> {{ $product-> product_price }}</p>
+                            <h4>Name: {{ $product->product_name }}</h4>
+                            <p><strong>Price: </strong> {{ $product-> product_price }}</p>
 
                         </div>
                         <div class="container">
