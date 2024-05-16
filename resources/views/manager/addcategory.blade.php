@@ -27,7 +27,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Name</th>                  
+                            <th>Name</th>
                             <th>Acition</th>
                         </tr>
                     </thead>
@@ -37,7 +37,9 @@
                             <td>{{ $category->category_name }}</td>
 
                             <td>
-                              
+                                <a href="{{ route('edit.category', ['category' => $category->category_id]) }}" class="btn btn-info btn-sm">
+                                    <span class="material-icons icon-small">edit</span> Edit
+                                </a>
                             </td>
                         </tr>
                         @endforeach

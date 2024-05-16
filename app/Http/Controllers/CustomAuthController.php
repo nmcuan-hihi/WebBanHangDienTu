@@ -77,26 +77,4 @@ class CustomAuthController extends Controller
         return redirect("login")->withSuccess('You are not allowed to access');
     }
 
-    public function toAddCategory()
-    {
-        $categories = Category::all();
-        return view('manager.addcategory', compact('categories'));
-    }
-
-    public function addCategory(Request $request)
-    {
-        // Validate form data
-        $request->validate([
-            'category_name' => 'required|string|max:255',
-        ]);
-    
-        // Tạo mới danh mục
-        $category = new Category();
-        $category->category_name = $request->input('category_name');
-        $category->save();
-    
-        $categories = Category::all(); 
-    
-        return view('manager.addcategory', compact('categories'))->with('success', 'Danh mục đã được thêm mới thành công.');
-    }
 }
