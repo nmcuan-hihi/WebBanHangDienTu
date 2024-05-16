@@ -95,6 +95,7 @@ class CustomAuthController extends Controller
         return redirect("login")->withSuccess('You are not allowed to access');
     }
 
+    
     // chuyển sang trang sửa thông tin user
     public function editUser(Request $request)
     {
