@@ -31,4 +31,8 @@ class Invoice extends Model
     {
         return $this->hasOne(UserProfile::class, 'user_id');
     }
+    public function details()
+{
+    return $this->hasMany(InvoiceDetail::class);
+}
 }
