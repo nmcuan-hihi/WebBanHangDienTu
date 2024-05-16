@@ -94,7 +94,7 @@ class CustomAuthController extends Controller
         return redirect("login")->withSuccess('You are not allowed to access');
     }
 
-    //delete user
+    //xoa user
     
     public function deleteUser(Request $request)
     {
