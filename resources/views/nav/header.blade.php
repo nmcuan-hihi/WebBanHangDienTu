@@ -53,11 +53,15 @@
           </li>
           @elseif(Auth::user()->role === 'admin')
           <li class="nav-item">
-            <span class="nav-link">Login to Admin: {{ Auth::user()->email }}</span>
+            <a class="nav-link" href="{{ route('addproduct') }}">Thêm sản phẩm</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Sign up</a>
+            <a class="nav-link" href="{{ route('add.manufacturer') }}">Thêm nhà cung cấp</a>
           </li>
+          <li class="nav-item">
+            <span class="nav-link">Login to Admin: {{ Auth::user()->email }}</span>
+          </li>
+          
           @endif
           @endauth
         </ul>

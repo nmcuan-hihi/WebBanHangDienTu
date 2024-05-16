@@ -13,7 +13,7 @@ class Invoice extends Model
     protected $table = 'invoice';
     protected $primaryKey = 'invoice_id';
     public $incrementing = true;
-    protected $table = 'invoice';
+
     protected $fillable = [
         'user_id',
         'total_amount',

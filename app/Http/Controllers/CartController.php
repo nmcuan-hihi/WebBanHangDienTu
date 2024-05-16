@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
-
+use App\Mail\InvoiceMail;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Invoice;
+use App\Models\InvoiceDetail;
 class CartController extends Controller
 {
     public function tocart()
@@ -19,20 +22,8 @@ class CartController extends Controller
         // Nếu người dùng chưa đăng nhập
         return redirect("login")->withSuccess('You are not allowed to access');
     }
-namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Mail\InvoiceMail;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
-use App\Models\Product;
-use App\Models\Invoice;
-use App\Models\InvoiceDetail;
 
-class CartController extends Controller
-{
     public function finalizePurchase(Request $request)
     {
         $user_id = Auth::user()->id;
@@ -204,8 +195,8 @@ class CartController extends Controller
         // Nếu sản phẩm không tồn tại trong giỏ hàng
         return redirect()->back()->with('error', 'Product not found in cart!');
     }
-        return redirect()->route('add.cart')->with('success', 'Product added to cart successfully.');
-    }
+        
+    
 
     public function updateQuantity(Request $request)
     {

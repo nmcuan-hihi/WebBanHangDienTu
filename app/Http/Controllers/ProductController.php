@@ -35,6 +35,7 @@ class ProductController extends Controller
         }
 
         $categories = Category::all();
+        
 
         return view('auth.home', compact('products', 'categories'));
     }
@@ -87,14 +88,6 @@ class ProductController extends Controller
     return redirect()->route('manager')->with('success', 'Successfully updated!');
 }
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\Manufacturer;
-use App\Models\Category;
-use Illuminate\Support\Facades\Storage;
-class ProductController extends Controller
-{
   
    
     public function showAddForm()
@@ -112,15 +105,11 @@ class ProductController extends Controller
         // Tìm kiếm sản phẩm trong cơ sở dữ liệu với từ khóa $searchTerm
         $products = Product::where('product_name', 'like', '%' . $searchTerm . '%')
                            ->paginate(10);
-
-        return view('auth.home', compact('products'));
+        $categories = Category::all();
+        return view('auth.home', compact('products','categories'));
     }
 
-    public function index()
-    {
-        $products = Product::paginate(10);
-        return view('auth.home', compact('products'));
-    }
+   
     
     public function getProductImage($id)
     {
@@ -158,7 +147,7 @@ class ProductController extends Controller
             $product->save();
 
             // Redirect with success message
-            return redirect()->route('home')->with('success', 'Product added successfully!');
+            return redirect()->route('manager')->with('success', 'Product added successfully!');
          
     }
 }

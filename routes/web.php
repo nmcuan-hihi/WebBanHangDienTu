@@ -11,10 +11,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\CustomCssFile;
 Route::get('tocken', [CustomAuthController::class, 'tochecktocken'])->name('token');
 use App\Http\Controllers\ForgotController;
 
-use App\Http\Controllers\CustomAuthController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ManufacturersController;
-use App\Http\Controllers\CartController;
+
 
 Route::get('addmanufacturers', [ManufacturersController::class, 'showAddForm'])->name('add.manufacturer');
 Route::post('addmanufacturers', [ManufacturersController::class, 'store'])->name('store.manufacturer');
@@ -29,8 +27,8 @@ Route::get('signout', [CustomAuthController::class, 'signout'])->name('signout')
 Route::get('home', [CustomAuthController::class, 'gohome'])->name('home');
 Route::post('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
 
-
-Route::get('home', [ProductController::class, 'index'])->name('filterProducts');
+Route::get('filter-products', [ProductController::class, 'index'])->name('filterProducts');
+//Route::get('home', [ProductController::class, 'index'])->name('filterProducts');
 Route::get('product', [ProductController::class, 'toproductedit'])->name('product.edit');
 Route::post('product', [ProductController::class, 'productedit'])->name('conflim.edit.product');
 

@@ -33,13 +33,10 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id', 'category_id');
     }
     
-    public function category() : BelongsTo 
-    {
-        return $this->belongsTo(Category::class);
-    }
+   
     
     public function manufacturer() : BelongsTo 
-    public function manufacturer(): BelongsTo
+
     {
         return $this->belongsTo(Manufacturer::class, 'manufacturer_id', 'manufacturer_id');
     }
