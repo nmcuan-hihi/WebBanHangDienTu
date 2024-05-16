@@ -55,6 +55,9 @@
           <li class="nav-item">
             <span class="nav-link">Login to Admin: {{ Auth::user()->email }}</span>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sign up</a>
+          </li>
           @endif
           @endauth
         </ul>
