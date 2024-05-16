@@ -72,7 +72,23 @@ class CustomAuthController extends Controller
         $categories = Category::all();
         return view('manager.addcategory', compact('categories'));
     }
+    public function toEditCategory($id)
+{
+    $category = Category::find($id);
+    return view('manager.editcategory', compact('category'));
+}
+public function editCategory(Request $request, $id)
+{
+    $request->validate([
+        'category_name' => 'required|string|max:255',
+    ]);
 
+    $category = Category::findOrFail($id);
+    $category->category_name = $request->input('category_name');
+    $category->save();
+
+    return redirect("addcategory")->with('success', 'Danh mục đã được cập nhật thành công.');
+}
     public function addCategory(Request $request)
     {
         $request->validate([
@@ -88,6 +104,7 @@ class CustomAuthController extends Controller
     public function deleteCategorys(Request $request ){
         $category_id = $request->get('id');
         $category = Category::destroy($category_id);
-        return redirect("addcategory")->with('success', 'Danh mục đã được xóa thành công.');
+        return redirect("")->with('success', 'Danh mục đã được xóa thành công.');
     }
+    
 }

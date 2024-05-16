@@ -3,8 +3,6 @@
 @section('content')
 <div class="container mt-5">
     <div class="row">
-
-
         <div class="col-md-8 offset-md-2">
             <div class="card">
                 <div class="card-header">
@@ -37,24 +35,24 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                       
-                                @foreach($categories as $category)
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        {{ $category->category_name }}
-                                        <form action="{{ route('deleteCategory', ['id' => $category->category_id]) }}"
-                                            method="POST">
-                                            @csrf
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Bạn có chắc muốn xóa?')">
-                                                <span class="material-icons">delete</span> Xóa
-                                            </button>
-                                        </form>
-                                    </li>
-                                @endforeach
-                          
+                        @foreach($categories as $category)
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ $category->category_name }}
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a href="{{ route('category.edit', ['id' => $category->category_id]) }}" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i> Sửa
+                                    </a>
+                                    <form action="{{ route('deleteCategory', ['id' => $category->category_id]) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa?')">
+                                            <i class="fas fa-trash-alt"></i> Xóa
+                                        </button>
+                                    </form>
+                                </div>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
-
             </div>
         </div>
     </div>
