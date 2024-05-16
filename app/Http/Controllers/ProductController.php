@@ -161,6 +161,5 @@ class ProductController extends Controller
         $product = Product::find($product_id);
         return view('auth.item', ['product' => $product]);
     }
-=======
->>>>>>> 0-cuan-fullchucnang
+
 }

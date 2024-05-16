@@ -123,16 +123,7 @@ class CustomAuthController extends Controller
             } else if ($user->role === 'custom') {
                 return redirect()->intended('home')->withSuccess('Signed in');
             } else {
-                return redirect()->route('login')->withErrors('Login FAIL');
-                switch ($user->role) {
-                    case 'admin':
-                        return redirect()->intended('manager')->withSuccess('Signed in with admin');
-                        break;
-                    case 'custom':
-                        return redirect()->intended('home')->withSuccess('Signed in');
-                    default:
-                        redirect("login")->withSuccess('Login FAIL'); // gọi router có tên login
-                }
+                return redirect()->route('login')->withErrors('Login FAIL');              
             }
 
             return redirect()->route('login')->withErrors('Login FAIL');
