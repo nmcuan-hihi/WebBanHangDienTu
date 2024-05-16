@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('login', [CustomAuthController::class, 'toLogin'])->name('login');
 Route::post('login', [CustomAuthController::class, 'checkUser'])->name('user.checkUser');
-Route::get('signout', [CustomAuthController::class, 'signout'])->name('signout');
 Route::get('home', [CustomAuthController::class, 'gohome'])->name('home');
+Route::get('signout', [CustomAuthController::class, 'signout'])->name('signout');
+
 Route::get('manager', [CustomAuthController::class, 'gomanager'])->name('manager');
 Route::get('/', function () {
     return view('auth.login');
