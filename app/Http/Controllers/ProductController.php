@@ -101,13 +101,17 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         $searchTerm = $request->input('search');
-
+    
         // Tìm kiếm sản phẩm trong cơ sở dữ liệu với từ khóa $searchTerm
-        $products = Product::where('product_name', 'like', '%' . $searchTerm . '%')
-                           ->paginate(6);
+        $products = Product::where(function ($query) use ($searchTerm) {
+                            $query->where('product_name', 'like', '%' . $searchTerm . '%')
+                                  ->orWhere('product_id', 'like', '%' . $searchTerm . '%');
+                        })
+                        ->paginate(6);
         $categories = Category::all();
-        return view('auth.home', compact('products','categories'));
+        return view('auth.home', compact('products', 'categories'));
     }
+    
 
    
     
