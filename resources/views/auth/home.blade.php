@@ -6,12 +6,14 @@
     .product-card {
         transition: transform 0.3s ease;
     }
+
     .product-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Tăng độ mờ */
-    transform: translateY(-10px);
-    background-color: #ccc7c6;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        /* Tăng độ mờ */
+        transform: translateY(-10px);
+        background-color: #ccc7c6;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
 
 
@@ -31,7 +33,7 @@
         <div class="col-lg-3">
             <form id="filterForm" action="{{ route('filterProducts') }}" method="GET">
                 <div class="d-flex mb-3">
-                    <div class="form-group mr-2" >
+                    <div class="form-group mr-2">
                         <label for="category" class="mr-2">Select Category:</label>
                         <select name="category" id="category" class="form-control mr-2" style="border: 1px solid black;">
                             <option value="">All Categories</option>
@@ -58,7 +60,7 @@
             <div class="justify-content-end">
                 <div>
                     <form action="{{ route('product.search') }}" method="GET" class="form-inline">
-                    <label for="search" class="mr-2">Search:</label>
+                        <label for="search" class="mr-2">Search:</label>
                         <div class="input-group">
                             <input style="border: 1px solid black;" class="form-control" style="height: 38px;" type="search" name="search" placeholder="Search" aria-label="Search">
                             <div class="input-group-append">
@@ -89,7 +91,10 @@
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Product name-->
-                            <h5 class="fw-bolder">{{ $product->product_name }}</h5>
+                            <a href="{{ route('showProductDetail', ['id' => $product->product_id]) }}" style="text-decoration: none;">
+                                <h5 class="card-title">{{ $product->product_name }}</h5>
+                            </a>
+
                             <!-- Product price-->
                             <p class="card-text">${{ $product->product_price }}</p>
                         </div>
@@ -141,23 +146,22 @@
         <li class="page-item"><a href="{{ $products->previousPageUrl() }}" class="page-link">&lt;</a></li>
         @endif
 
-        @for ($i = $startPage; $i <= $endPage; $i++)
-        <li class="page-item {{ $currentPage == $i ? 'active' : '' }}">
+        @for ($i = $startPage; $i <= $endPage; $i++) <li class="page-item {{ $currentPage == $i ? 'active' : '' }}">
             <a href="{{ $products->url($i) }}" class="page-link">{{ $i }}</a>
-        </li>
-        @endfor
+            </li>
+            @endfor
 
-        @if ($products->hasMorePages())
-        <li class="page-item"><a href="{{ $products->nextPageUrl() }}" class="page-link">&gt;</a></li>
-        @else
-        <li class="page-item disabled"><span class="page-link">&gt;</span></li>
-        @endif
+            @if ($products->hasMorePages())
+            <li class="page-item"><a href="{{ $products->nextPageUrl() }}" class="page-link">&gt;</a></li>
+            @else
+            <li class="page-item disabled"><span class="page-link">&gt;</span></li>
+            @endif
 
-        @if ($products->hasMorePages())
-        <li class="page-item"><a href="{{ $products->url($lastPage) }}" class="page-link">&raquo;</a></li>
-        @else
-        <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
-        @endif
+            @if ($products->hasMorePages())
+            <li class="page-item"><a href="{{ $products->url($lastPage) }}" class="page-link">&raquo;</a></li>
+            @else
+            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+            @endif
     </ul>
 </div>
 

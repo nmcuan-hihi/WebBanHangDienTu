@@ -47,7 +47,7 @@
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
               </form>
 
-              <a href="{{ route('forgot.password.form') }}">quen mat khau</a>
+              <a style="text-decoration: none;" href="{{ route('forgot.password.form') }}">Quên mật khẩu</a>
 
             </div>
 
