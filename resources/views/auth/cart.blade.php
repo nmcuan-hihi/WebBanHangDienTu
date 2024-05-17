@@ -62,11 +62,12 @@
         Giỏ hàng trống, hãy thêm các sản phẩm tốt của chúng tôi vào giở hàng nào ! Hehe
     </div>
     @endif
-</div>
-<div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end">
         <form action="{{ route('cart.purchase') }}" method="post">
             @csrf
             <button type="submit" class="btn btn-success">Purchase</button>
         </form>
     </div>
+</div>
+
 @endsection

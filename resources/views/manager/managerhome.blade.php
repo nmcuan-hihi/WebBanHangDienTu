@@ -77,7 +77,7 @@
         @endif
 
         @if ($products->onFirstPage())
-            <li class="page-item disabled"><span class="page-link">Previous</span></li>
+            <li class="page-item disabled"><span class="page-link">&lt;</span></li>
         @else
             <li class="page-item"><a href="{{ $products->previousPageUrl() }}" class="page-link"><</a></li>
         @endif
@@ -91,7 +91,7 @@
         @if ($products->hasMorePages())
             <li class="page-item"><a href="{{ $products->nextPageUrl() }}" class="page-link">></a></li>
         @else
-            <li class="page-item disabled"><span class="page-link">Next</span></li>
+            <li class="page-item disabled"><span class="page-link">&gt;</span></li>
         @endif
 
         @if ($products->hasMorePages())
