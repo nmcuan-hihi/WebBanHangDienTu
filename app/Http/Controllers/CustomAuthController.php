@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Models\Category;
+
 class CustomAuthController extends Controller
 {
     public function toLogin()
@@ -141,25 +142,10 @@ class CustomAuthController extends Controller
 
     public function gohome(Request $request)
     {
-        // Kiểm tra xem người dùng đã đăng nhập hay chưa
         if (Auth::check()) {
-            // Lấy người dùng hiện tại
-            $user = Auth::user();
-
-            // Kiểm tra vai trò của người dùng
-            if ($user->role === 'admin') {
-                // Nếu vai trò là admin, chuyển hướng đến trang quản lý
-                $products = Product::paginate(7);
-                $categories = Category::all();
-                return view('manager.managerhome', compact('products', 'categories'));;
-            } elseif ($user->role === 'custom') {
-                // Nếu vai trò là custom, trả về trang chủ với sản phẩm phân trang
-                $products = Product::paginate(6);
-                return view('auth.home', compact('products'));
-            }
+            return view('auth.home');
         }
 
-        // Nếu người dùng chưa đăng nhập
         return redirect("login")->withSuccess('You are not allowed to access');
     }
 
@@ -199,23 +185,32 @@ class CustomAuthController extends Controller
                 return redirect()->back()->withErrors('Invalid token.');
             }
         }
+        }
 
-        // Nếu người dùng chưa đăng nhập
         return redirect("login")->withSuccess('You are not allowed to access');
     }
 
-
-
-    public function backhome()
+    public function toAddCategory()
     {
-        return view('auth.home', compact('products'));
+        $categories = Category::all();
+        return view('manager.addcategory', compact('categories'));
     }
 
-
-    public function backmanager()
+    public function addCategory(Request $request)
     {
-        $products = Product::paginate(7);
-        $categories = Category::all();
-        return view('manager.managerhome', compact('products', 'categories'));
+        $request->validate([
+            'category_name' => 'required|string|max:255',
+        ]);
+    
+        $category = new Category();
+        $category->category_name = $request->input('category_name');
+        $category->save();
+    
+        return redirect("addcategory")->with('success', 'Danh mục đã được thêm mới thành công.');
+    }
+    public function deleteCategorys(Request $request ){
+        $category_id = $request->get('id');
+        $category = Category::destroy($category_id);
+        return redirect("addcategory")->with('success', 'Danh mục đã được xóa thành công.');
     }
 }

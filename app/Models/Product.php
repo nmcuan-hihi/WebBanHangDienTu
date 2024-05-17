@@ -23,17 +23,10 @@ class Product extends Model
         'warranty_period',
         'product_quantity'
     ];
-
-    /**
-     * Relationship
-     * @return BelongsTo
-     */
-    public function category()
-    {
-        return $this->belongsTo(Category::class, 'category_id', 'category_id');
-    }
-    
-    
+    public function categories()
+{
+    return $this->belongsToMany(Category::class, 'category_product');
+}
     public function manufacturer() : BelongsTo 
 
     {

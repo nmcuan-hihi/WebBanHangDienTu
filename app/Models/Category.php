@@ -17,12 +17,8 @@ class Category extends Model
     protected $fillable = [
         'category_name',    
     ];
-     /**
-     * Relationship
-     * @return HasMany
-     */
-    public function products(): HasMany
+    public function products()
     {
-        return $this->hasMany(Product::class, 'category_id', 'category_id');
+        return $this->belongsToMany(Product::class, 'category_product');
     }
-}    
+}
