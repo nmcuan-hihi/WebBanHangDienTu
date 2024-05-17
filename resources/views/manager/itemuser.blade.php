@@ -49,7 +49,13 @@
                                 <tr>
                                     <td>{{ $item->invoice_id }}</td>
                                     <td>{{ $item->total_amount }}</td>
-                                    <td>{{ $item->invoice_payment }}</td>
+                                    <td>
+                                        @if($item->invoice_payment == 0)
+                                        Chưa thanh toán
+                                        @elseif($item->invoice_payment == 1)
+                                        Đã thanh toán
+                                        @endif
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
